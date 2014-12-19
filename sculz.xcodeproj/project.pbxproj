@@ -14,6 +14,7 @@
 		E24019681A43417900E75EBA /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E24019671A43417900E75EBA /* Images.xcassets */; };
 		E240196B1A43417900E75EBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E24019691A43417900E75EBA /* LaunchScreen.xib */; };
 		E24019771A43417A00E75EBA /* sculzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E24019761A43417A00E75EBA /* sculzTests.m */; };
+		E2E856C81A44067900680528 /* schoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856C71A44067900680528 /* schoolViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -40,6 +41,9 @@
 		E24019701A43417A00E75EBA /* sculzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sculzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24019751A43417A00E75EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24019761A43417A00E75EBA /* sculzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sculzTests.m; sourceTree = "<group>"; };
+		E2E856C61A44067900680528 /* schoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolViewController.h; sourceTree = "<group>"; };
+		E2E856C71A44067900680528 /* schoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolViewController.m; sourceTree = "<group>"; };
+		E2E856CA1A44078600680528 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -81,6 +85,8 @@
 		E24019591A43417800E75EBA /* sculz */ = {
 			isa = PBXGroup;
 			children = (
+				E2E856C91A44076F00680528 /* constants */,
+				E2E856C51A4405E200680528 /* Views */,
 				E240195E1A43417800E75EBA /* AppDelegate.h */,
 				E240195F1A43417900E75EBA /* AppDelegate.m */,
 				E24019611A43417900E75EBA /* ViewController.h */,
@@ -117,6 +123,23 @@
 				E24019751A43417A00E75EBA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E2E856C51A4405E200680528 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856C61A44067900680528 /* schoolViewController.h */,
+				E2E856C71A44067900680528 /* schoolViewController.m */,
+			);
+			name = Views;
+			sourceTree = "<group>";
+		};
+		E2E856C91A44076F00680528 /* constants */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856CA1A44078600680528 /* constants.h */,
+			);
+			name = constants;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -219,6 +242,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E856C81A44067900680528 /* schoolViewController.m in Sources */,
 				E24019631A43417900E75EBA /* ViewController.m in Sources */,
 				E24019601A43417900E75EBA /* AppDelegate.m in Sources */,
 				E240195D1A43417800E75EBA /* main.m in Sources */,
@@ -297,7 +321,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -332,7 +356,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 8.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
@@ -344,8 +368,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = sculz/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
@@ -354,8 +380,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = sculz/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
@@ -412,6 +440,7 @@
 				E240197C1A43417A00E75EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E240197D1A43417A00E75EBA /* Build configuration list for PBXNativeTarget "sculzTests" */ = {
 			isa = XCConfigurationList;
@@ -420,6 +449,7 @@
 				E240197F1A43417A00E75EBA /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
