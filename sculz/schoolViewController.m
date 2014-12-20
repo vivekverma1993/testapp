@@ -11,12 +11,13 @@
 //#import "constants.h"
 
 @interface schoolViewController ()
-@property(nonatomic,strong) UITableView *tableView;
+@property (nonatomic, strong) UITableView *tableView;
 @property (nonatomic, strong) UIView *downButtonView;
 @property (nonatomic, strong) UIButton *callButton;
 @property (nonatomic, strong) UIButton *bookmarkButton;
 @property (nonatomic, strong) UIButton *beenhereButton;
 @property (nonatomic, strong) UIButton *ratingButton;
+@property (nonatomic, strong) UIAlertController *alertController;
 
 @end
 
@@ -27,19 +28,56 @@
 
 #pragma mark List of actions
 
--(void)callAction{
 
+-(void)makeAlert{
+    self.alertController = [UIAlertController
+                                          alertControllerWithTitle:@""
+                                          message:@"011-2345768"
+                                          preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *cancelAction = [UIAlertAction
+                                   actionWithTitle:NSLocalizedString(@"Cancel", @"Cancel action")
+                                   style:UIAlertActionStyleCancel
+                                   handler:^(UIAlertAction *action)
+                                   {
+                                       NSLog(@"Cancel action");
+                                   }];
+
+    
+    UIAlertAction *okAction = [UIAlertAction
+                               actionWithTitle:NSLocalizedString(@"Call", @"OK action")
+                               style:UIAlertActionStyleDefault
+                               handler:^(UIAlertAction *action)
+                               {
+                                   // make call code here and test with a iphone not a ios simiulator
+                               }];
+    
+    [self.alertController addAction:cancelAction];
+    [self.alertController addAction:okAction];
+}
+
+
+-(void)callAction{
+    //open a alert View with a message to call that school
+    
+    [self presentViewController:self.alertController animated:YES completion:nil];
+   
+    
 }
 
 -(void)bookmarkAction{
-
+    self.bookmarkButton.backgroundColor = [UIColor redColor];
+    
+    // write a request here to save the current school
+    // check whether it is already saved or not.
 }
 
 -(void)beenHereAction{
+    // write a request to save this school as the place where the user has studied
     
 }
 -(void)rateAction{
-
+    // write a request to send the rating given by the user to the school
 }
 
 
@@ -111,7 +149,10 @@
     self.tableView.tableFooterView = [[UIView alloc] initWithFrame:CGRectZero];
     
     [self.view addSubview:self.tableView];
-
+    
+    
+    [self makeAlert];
+    
     
 }
 
@@ -140,6 +181,24 @@
             
             UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, cellHeight)];
             imageView.image = [UIImage imageNamed:@"scl.jpg"];
+            
+            
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 25, 120, 20)];
+            nameLabel.text = @"Abcd school";
+            nameLabel.textColor = [UIColor whiteColor];
+            nameLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:18];
+            
+            
+            UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 25, 30, 25)];
+            rateLabel.text = @"3.9";
+            rateLabel.textAlignment= NSTextAlignmentCenter;
+            rateLabel.backgroundColor = [UIColor orangeColor];
+            rateLabel.textColor = [UIColor whiteColor];
+            rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
+            
+           
+            [imageView addSubview:nameLabel];
+            [imageView addSubview:rateLabel];
             
             [cell addSubview:imageView];
             [cell addSubview:self.downButtonView];

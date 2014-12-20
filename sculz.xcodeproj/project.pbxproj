@@ -15,6 +15,10 @@
 		E240196B1A43417900E75EBA /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E24019691A43417900E75EBA /* LaunchScreen.xib */; };
 		E24019771A43417A00E75EBA /* sculzTests.m in Sources */ = {isa = PBXBuildFile; fileRef = E24019761A43417A00E75EBA /* sculzTests.m */; };
 		E2E856C81A44067900680528 /* schoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856C71A44067900680528 /* schoolViewController.m */; };
+		E2E856CE1A45779400680528 /* school.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856CD1A45779400680528 /* school.m */; };
+		E2E856D21A457B6300680528 /* dataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856D11A457B6300680528 /* dataModel.m */; };
+		E2E856D51A457CA900680528 /* user.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856D41A457CA900680528 /* user.m */; };
+		E2E856DC1A45B88700680528 /* NearbySchoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856DB1A45B88700680528 /* NearbySchoolViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -44,6 +48,14 @@
 		E2E856C61A44067900680528 /* schoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolViewController.h; sourceTree = "<group>"; };
 		E2E856C71A44067900680528 /* schoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolViewController.m; sourceTree = "<group>"; };
 		E2E856CA1A44078600680528 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
+		E2E856CC1A45779400680528 /* school.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = school.h; sourceTree = "<group>"; };
+		E2E856CD1A45779400680528 /* school.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = school.m; sourceTree = "<group>"; };
+		E2E856D01A457B6300680528 /* dataModel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = dataModel.h; sourceTree = "<group>"; };
+		E2E856D11A457B6300680528 /* dataModel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = dataModel.m; sourceTree = "<group>"; };
+		E2E856D31A457CA900680528 /* user.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = user.h; sourceTree = "<group>"; };
+		E2E856D41A457CA900680528 /* user.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = user.m; sourceTree = "<group>"; };
+		E2E856DA1A45B88700680528 /* NearbySchoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NearbySchoolViewController.h; sourceTree = "<group>"; };
+		E2E856DB1A45B88700680528 /* NearbySchoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NearbySchoolViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -85,6 +97,8 @@
 		E24019591A43417800E75EBA /* sculz */ = {
 			isa = PBXGroup;
 			children = (
+				E2E856CF1A457B3B00680528 /* Data Model */,
+				E2E856CB1A45776900680528 /* Single Method Classes */,
 				E2E856C91A44076F00680528 /* constants */,
 				E2E856C51A4405E200680528 /* Views */,
 				E240195E1A43417800E75EBA /* AppDelegate.h */,
@@ -128,8 +142,8 @@
 		E2E856C51A4405E200680528 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				E2E856C61A44067900680528 /* schoolViewController.h */,
-				E2E856C71A44067900680528 /* schoolViewController.m */,
+				E2E856D91A45B83700680528 /* Nearby Schools TableView */,
+				E2E856D81A45B7FE00680528 /* School View */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -140,6 +154,60 @@
 				E2E856CA1A44078600680528 /* constants.h */,
 			);
 			name = constants;
+			sourceTree = "<group>";
+		};
+		E2E856CB1A45776900680528 /* Single Method Classes */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856D71A457CD000680528 /* user */,
+				E2E856D61A457CB600680528 /* school */,
+			);
+			name = "Single Method Classes";
+			sourceTree = "<group>";
+		};
+		E2E856CF1A457B3B00680528 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856D01A457B6300680528 /* dataModel.h */,
+				E2E856D11A457B6300680528 /* dataModel.m */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		E2E856D61A457CB600680528 /* school */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856CC1A45779400680528 /* school.h */,
+				E2E856CD1A45779400680528 /* school.m */,
+			);
+			name = school;
+			sourceTree = "<group>";
+		};
+		E2E856D71A457CD000680528 /* user */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856D31A457CA900680528 /* user.h */,
+				E2E856D41A457CA900680528 /* user.m */,
+			);
+			name = user;
+			sourceTree = "<group>";
+		};
+		E2E856D81A45B7FE00680528 /* School View */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856C61A44067900680528 /* schoolViewController.h */,
+				E2E856C71A44067900680528 /* schoolViewController.m */,
+			);
+			name = "School View";
+			sourceTree = "<group>";
+		};
+		E2E856D91A45B83700680528 /* Nearby Schools TableView */ = {
+			isa = PBXGroup;
+			children = (
+				E2E856DA1A45B88700680528 /* NearbySchoolViewController.h */,
+				E2E856DB1A45B88700680528 /* NearbySchoolViewController.m */,
+			);
+			name = "Nearby Schools TableView";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -242,10 +310,14 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E2E856CE1A45779400680528 /* school.m in Sources */,
 				E2E856C81A44067900680528 /* schoolViewController.m in Sources */,
 				E24019631A43417900E75EBA /* ViewController.m in Sources */,
+				E2E856D21A457B6300680528 /* dataModel.m in Sources */,
+				E2E856D51A457CA900680528 /* user.m in Sources */,
 				E24019601A43417900E75EBA /* AppDelegate.m in Sources */,
 				E240195D1A43417800E75EBA /* main.m in Sources */,
+				E2E856DC1A45B88700680528 /* NearbySchoolViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
