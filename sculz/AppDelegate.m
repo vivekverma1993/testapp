@@ -7,6 +7,8 @@
 //
 
 #import "AppDelegate.h"
+#import "LoginViewController.h"
+#import "dataModel.h"
 
 @interface AppDelegate ()
 
@@ -16,9 +18,24 @@
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    // Override point for customization after application launch.
+    // Override point for customization after application launch
+    
+    LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
+    
+//    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
+//    self.window.backgroundColor = [UIColor whiteColor];
+//    
+//    [self.window setRootViewController:loginViewController];
+//    [self.window makeKeyAndVisible];
+
+    ([[dataModel sharedManager] window]).backgroundColor =  [UIColor whiteColor];
+    [[[dataModel sharedManager] window] setRootViewController:loginViewController];
+    [[[dataModel sharedManager] window] makeKeyAndVisible];
     return YES;
 }
+
+
+
 
 - (void)applicationWillResignActive:(UIApplication *)application {
     // Sent when the application is about to move from active to inactive state. This can occur for certain types of temporary interruptions (such as an incoming phone call or SMS message) or when the user quits the application and it begins the transition to the background state.

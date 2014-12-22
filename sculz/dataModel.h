@@ -6,6 +6,7 @@
 //  Copyright (c) 2014 self. All rights reserved.
 //
 
+#import <UIKit/UIKit.h>
 #import <Foundation/Foundation.h>
 #import "school.h"
 
@@ -13,6 +14,8 @@
 
 @property(nonatomic) school *presentSchool;
 @property(nonatomic) NSMutableArray *nearbySchools;
+@property (strong, nonatomic) UIWindow *window;
+
 
 +(id) sharedManager;
 

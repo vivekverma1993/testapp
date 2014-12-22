@@ -8,6 +8,8 @@
 
 #import "NearbySchoolViewController.h"
 #import "dataModel.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
 
 @interface NearbySchoolViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -17,6 +19,14 @@
 @implementation NearbySchoolViewController
 
 
+- (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
+{
+    self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
+    if (self) {
+        self.title = @"Nearby";
+    }
+    return self;
+}
 
 // This method is called once we click inside the textField
 -(void)textFieldDidBeginEditing:(UITextField *)textField{
@@ -39,6 +49,20 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    
+    //[[self rdv_tabBarItem] setBadgeValue:@"3"];
+    
+    if (self.rdv_tabBarController.tabBar.translucent) {
+        UIEdgeInsets insets = UIEdgeInsetsMake(0,
+                                               0,
+                                               CGRectGetHeight(self.rdv_tabBarController.tabBar.frame),
+                                               0);
+        
+        self.tableView.contentInset = insets;
+        self.tableView.scrollIndicatorInsets = insets;
+    }
+
+    
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, 320, self.view.bounds.size.height)];
     
     self.tableView.delegate =self;

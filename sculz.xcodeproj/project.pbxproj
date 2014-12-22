@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		E239E9F21A4837AB00B1F71D /* RDVTabBar.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9ED1A4837AB00B1F71D /* RDVTabBar.m */; };
+		E239E9F31A4837AB00B1F71D /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9EF1A4837AB00B1F71D /* RDVTabBarController.m */; };
+		E239E9F41A4837AB00B1F71D /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9F11A4837AB00B1F71D /* RDVTabBarItem.m */; };
+		E239E9F81A486EA300B1F71D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9F71A486EA300B1F71D /* LoginViewController.m */; };
 		E240195D1A43417800E75EBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195C1A43417800E75EBA /* main.m */; };
 		E24019601A43417900E75EBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195F1A43417900E75EBA /* AppDelegate.m */; };
 		E24019631A43417900E75EBA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24019621A43417900E75EBA /* ViewController.m */; };
@@ -32,6 +36,14 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		E239E9EC1A4837AB00B1F71D /* RDVTabBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBar.h; sourceTree = "<group>"; };
+		E239E9ED1A4837AB00B1F71D /* RDVTabBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBar.m; sourceTree = "<group>"; };
+		E239E9EE1A4837AB00B1F71D /* RDVTabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarController.h; sourceTree = "<group>"; };
+		E239E9EF1A4837AB00B1F71D /* RDVTabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarController.m; sourceTree = "<group>"; };
+		E239E9F01A4837AB00B1F71D /* RDVTabBarItem.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RDVTabBarItem.h; sourceTree = "<group>"; };
+		E239E9F11A4837AB00B1F71D /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
+		E239E9F61A486EA300B1F71D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
+		E239E9F71A486EA300B1F71D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
 		E24019571A43417800E75EBA /* sculz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sculz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E240195B1A43417800E75EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E240195C1A43417800E75EBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -76,6 +88,36 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		E239E9EA1A47FD8700B1F71D /* External Libraries */ = {
+			isa = PBXGroup;
+			children = (
+				E239E9EB1A4837AB00B1F71D /* RDVTabBarController */,
+			);
+			name = "External Libraries";
+			sourceTree = "<group>";
+		};
+		E239E9EB1A4837AB00B1F71D /* RDVTabBarController */ = {
+			isa = PBXGroup;
+			children = (
+				E239E9EC1A4837AB00B1F71D /* RDVTabBar.h */,
+				E239E9ED1A4837AB00B1F71D /* RDVTabBar.m */,
+				E239E9EE1A4837AB00B1F71D /* RDVTabBarController.h */,
+				E239E9EF1A4837AB00B1F71D /* RDVTabBarController.m */,
+				E239E9F01A4837AB00B1F71D /* RDVTabBarItem.h */,
+				E239E9F11A4837AB00B1F71D /* RDVTabBarItem.m */,
+			);
+			path = RDVTabBarController;
+			sourceTree = "<group>";
+		};
+		E239E9F51A486E7A00B1F71D /* Login View */ = {
+			isa = PBXGroup;
+			children = (
+				E239E9F61A486EA300B1F71D /* LoginViewController.h */,
+				E239E9F71A486EA300B1F71D /* LoginViewController.m */,
+			);
+			name = "Login View";
+			sourceTree = "<group>";
+		};
 		E240194E1A43417800E75EBA = {
 			isa = PBXGroup;
 			children = (
@@ -97,6 +139,7 @@
 		E24019591A43417800E75EBA /* sculz */ = {
 			isa = PBXGroup;
 			children = (
+				E239E9EA1A47FD8700B1F71D /* External Libraries */,
 				E2E856CF1A457B3B00680528 /* Data Model */,
 				E2E856CB1A45776900680528 /* Single Method Classes */,
 				E2E856C91A44076F00680528 /* constants */,
@@ -142,6 +185,7 @@
 		E2E856C51A4405E200680528 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E239E9F51A486E7A00B1F71D /* Login View */,
 				E2E856D91A45B83700680528 /* Nearby Schools TableView */,
 				E2E856D81A45B7FE00680528 /* School View */,
 			);
@@ -316,8 +360,12 @@
 				E2E856D21A457B6300680528 /* dataModel.m in Sources */,
 				E2E856D51A457CA900680528 /* user.m in Sources */,
 				E24019601A43417900E75EBA /* AppDelegate.m in Sources */,
+				E239E9F31A4837AB00B1F71D /* RDVTabBarController.m in Sources */,
+				E239E9F41A4837AB00B1F71D /* RDVTabBarItem.m in Sources */,
+				E239E9F81A486EA300B1F71D /* LoginViewController.m in Sources */,
 				E240195D1A43417800E75EBA /* main.m in Sources */,
 				E2E856DC1A45B88700680528 /* NearbySchoolViewController.m in Sources */,
+				E239E9F21A4837AB00B1F71D /* RDVTabBar.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
