@@ -10,6 +10,8 @@
 #import "dataModel.h"
 #import "RDVTabBarController.h"
 #import "RDVTabBarItem.h"
+#import "school.h"
+#import "schoolViewController.h"
 
 @interface NearbySchoolViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -82,8 +84,7 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section
 {
-    //return [[[dataModel sharedManager] nearbySchools] count];
-    return 10;
+    return [[[dataModel sharedManager] nearbySchools] count] + 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
@@ -133,22 +134,22 @@
             UIView *bview = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 110)];
             bview.backgroundColor = [UIColor whiteColor];
                                      
-            UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 150, 20)];
-            name.text = @"Abcd school";
+            UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 250, 20)];
+            name.text = ((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).name;
             name.textColor = [UIColor redColor];
-            name.font = [UIFont fontWithName:@"Arial" size:16];
+            name.font = [UIFont fontWithName:@"Arial" size:12];
             
-            UILabel *address = [[UILabel alloc] initWithFrame:CGRectMake(5, 25, 150, 20)];
-            address.text = @"Civil Lines, Delhi";
+            UILabel *address = [[UILabel alloc] initWithFrame:CGRectMake(5, 25, 250, 20)];
+            address.text = ((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).address;
             address.textColor = [UIColor blackColor];
-            address.font = [UIFont fontWithName:@"Arial" size:16];
+            address.font = [UIFont fontWithName:@"Arial" size:10];
             
             UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(275, 5, 30, 20)];
-            rateLabel.text = @"3.9";
+            rateLabel.text = [NSString stringWithFormat:@"%@",((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).rating];
             rateLabel.textAlignment= NSTextAlignmentCenter;
             rateLabel.backgroundColor = [UIColor orangeColor];
             rateLabel.textColor = [UIColor whiteColor];
-            rateLabel.font = [UIFont fontWithName:@"Arial-Bold" size:16];
+            rateLabel.font = [UIFont fontWithName:@"Arial-Bold" size:12];
         
             
             [bview addSubview:name];
@@ -166,6 +167,40 @@
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
     return 120;
 }
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    if(indexPath.row!=0){
+        [[dataModel sharedManager] setPresentSchool:((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1])];
+    
+        NSLog(@"current user property id is %@",((school *)[[dataModel sharedManager] presentSchool]).name);
+    
+        
+       // MyNewViewController *myNewVC = [[MyNewViewController alloc] init];
+        
+        // do any setup you need for myNewVC
+        
+        //[self presentModalViewController:myNewVC animated:YES];
+        [self performSegueWithIdentifier:@"schoolDetail" sender:self];
+    }
+    
+}
+
+
+- (void)prepareForSegue:(UIStoryboardSegue *)segue sender:(id)sender {
+    NSLog(@"hey!!!!");
+    if ([[segue identifier] isEqualToString:@"schoolDetail"])
+    {
+        // Get reference to the destination view controller
+        schoolViewController *vc = [segue destinationViewController];
+        
+        // Pass any objects to the view controller here, like...
+        vc.school = [[dataModel sharedManager] presentSchool];
+        
+    }
+    
+}
+
 
 
 

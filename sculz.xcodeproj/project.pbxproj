@@ -11,6 +11,8 @@
 		E239E9F31A4837AB00B1F71D /* RDVTabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9EF1A4837AB00B1F71D /* RDVTabBarController.m */; };
 		E239E9F41A4837AB00B1F71D /* RDVTabBarItem.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9F11A4837AB00B1F71D /* RDVTabBarItem.m */; };
 		E239E9F81A486EA300B1F71D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9F71A486EA300B1F71D /* LoginViewController.m */; };
+		E239E9FC1A493EC800B1F71D /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9FB1A493EC800B1F71D /* ServerManager.m */; };
+		E239EA001A49A86500B1F71D /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9FF1A49A86500B1F71D /* StarRatingView.m */; };
 		E240195D1A43417800E75EBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195C1A43417800E75EBA /* main.m */; };
 		E24019601A43417900E75EBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195F1A43417900E75EBA /* AppDelegate.m */; };
 		E24019631A43417900E75EBA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24019621A43417900E75EBA /* ViewController.m */; };
@@ -44,6 +46,10 @@
 		E239E9F11A4837AB00B1F71D /* RDVTabBarItem.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RDVTabBarItem.m; sourceTree = "<group>"; };
 		E239E9F61A486EA300B1F71D /* LoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = LoginViewController.h; sourceTree = "<group>"; };
 		E239E9F71A486EA300B1F71D /* LoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = LoginViewController.m; sourceTree = "<group>"; };
+		E239E9FA1A493EC800B1F71D /* ServerManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ServerManager.h; sourceTree = "<group>"; };
+		E239E9FB1A493EC800B1F71D /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
+		E239E9FE1A49A86500B1F71D /* StarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarRatingView.h; sourceTree = "<group>"; };
+		E239E9FF1A49A86500B1F71D /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRatingView.m; sourceTree = "<group>"; };
 		E24019571A43417800E75EBA /* sculz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sculz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E240195B1A43417800E75EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E240195C1A43417800E75EBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -91,6 +97,7 @@
 		E239E9EA1A47FD8700B1F71D /* External Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E239E9FD1A49A81200B1F71D /* Rating View */,
 				E239E9EB1A4837AB00B1F71D /* RDVTabBarController */,
 			);
 			name = "External Libraries";
@@ -118,6 +125,24 @@
 			name = "Login View";
 			sourceTree = "<group>";
 		};
+		E239E9F91A493E5F00B1F71D /* Backend class */ = {
+			isa = PBXGroup;
+			children = (
+				E239E9FA1A493EC800B1F71D /* ServerManager.h */,
+				E239E9FB1A493EC800B1F71D /* ServerManager.m */,
+			);
+			name = "Backend class";
+			sourceTree = "<group>";
+		};
+		E239E9FD1A49A81200B1F71D /* Rating View */ = {
+			isa = PBXGroup;
+			children = (
+				E239E9FE1A49A86500B1F71D /* StarRatingView.h */,
+				E239E9FF1A49A86500B1F71D /* StarRatingView.m */,
+			);
+			name = "Rating View";
+			sourceTree = "<group>";
+		};
 		E240194E1A43417800E75EBA = {
 			isa = PBXGroup;
 			children = (
@@ -139,6 +164,7 @@
 		E24019591A43417800E75EBA /* sculz */ = {
 			isa = PBXGroup;
 			children = (
+				E239E9F91A493E5F00B1F71D /* Backend class */,
 				E239E9EA1A47FD8700B1F71D /* External Libraries */,
 				E2E856CF1A457B3B00680528 /* Data Model */,
 				E2E856CB1A45776900680528 /* Single Method Classes */,
@@ -366,6 +392,8 @@
 				E240195D1A43417800E75EBA /* main.m in Sources */,
 				E2E856DC1A45B88700680528 /* NearbySchoolViewController.m in Sources */,
 				E239E9F21A4837AB00B1F71D /* RDVTabBar.m in Sources */,
+				E239E9FC1A493EC800B1F71D /* ServerManager.m in Sources */,
+				E239EA001A49A86500B1F71D /* StarRatingView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

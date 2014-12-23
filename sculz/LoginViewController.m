@@ -13,6 +13,7 @@
 #import "schoolViewController.h"
 #import "ViewController.h"
 #import "dataModel.h"
+#import "ServerManager.h"
 
 @interface LoginViewController ()
 
@@ -28,9 +29,9 @@
 -(void)viewDidAppear:(BOOL)animated{
     [self setupViewControllers];
     [self customizeInterface];
+    [[ServerManager sharedManager] getNearbySchools:28.661039 :77.274277 :@"vivek"];
     [[[dataModel sharedManager] window] setRootViewController:self.viewController];
     [[[dataModel sharedManager] window] makeKeyAndVisible];
-
 }
 
 
@@ -62,7 +63,8 @@
 #pragma mark - Methods
 
 - (void)setupViewControllers {
-    UIViewController *firstViewController = [[NearbySchoolViewController alloc] init];
+    UIViewController *firstViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"nearby"];
+    
     UIViewController *firstNavigationController = [[UINavigationController alloc]
                                                    initWithRootViewController:firstViewController];
     

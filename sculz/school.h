@@ -16,11 +16,12 @@
 @property(nonatomic) NSString *contact;
 @property(nonatomic) double latitude;
 @property(nonatomic) double longitude;
-@property(nonatomic) float rating;
+@property(nonatomic) NSString *rating;
 @property(nonatomic) int numberOfRaters;
 @property(nonatomic) int numberOfReviews;
 @property(nonatomic) NSString *review1;
 @property(nonatomic) NSString *review2;
+@property(nonatomic) float distanceFromCurrentLocation;
 
 - (instancetype)initWithIdS:(int)idS
                        name:(NSString*)name
@@ -28,11 +29,12 @@
                     contact:(NSString*)contact
                    latitude:(double)latitude
                   longitude:(double)longitude
-                     rating:(float)rating
+                     rating:(NSString*)rating
              numberOfRaters:(int)numberOfRaters
              numberOfReviews:(int)numberOfReviews
                     review1:(NSString*)review1
-                    review2:(NSString*)review2;
+                    review2:(NSString*)review2
+distanceFromCurrentLocation:(float)distanceFromCurrentLocation;
 
 
 @end

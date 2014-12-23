@@ -54,7 +54,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3B-Te-9Ff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2645.5" y="336.5"/>
+            <point key="canvasLocation" x="1635.5" y="1111.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="j4I-Pa-ArN">
@@ -76,25 +76,6 @@
             </objects>
             <point key="canvasLocation" x="1213.5" y="336.5"/>
         </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="Pa4-V2-MTR">
-            <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="PGD-5W-eUX" sceneMemberID="viewController">
-                    <toolbarItems/>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="O9r-kR-PaF">
-                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <nil name="viewControllers"/>
-                    <connections>
-                        <segue destination="kNc-lc-A3Z" kind="relationship" relationship="rootViewController" id="v2N-QG-Hke"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="OI4-Nl-o3p" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2113.5" y="336.5"/>
-        </scene>
         <!--Nearby School View Controller-->
         <scene sceneID="jGr-9i-KSF">
             <objects>
@@ -109,6 +90,9 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="kNc-lc-A3Z" kind="show" identifier="schoolDetail" id="FaU-H5-l7Y"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPg-D6-pml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

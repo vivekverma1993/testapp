@@ -16,11 +16,12 @@
                     contact:(NSString*)contact
                    latitude:(double)latitude
                   longitude:(double)longitude
-                     rating:(float)rating
+                     rating:(NSString*)rating
              numberOfRaters:(int)numberOfRaters
             numberOfReviews:(int)numberOfReviews
                     review1:(NSString*)review1
-                    review2:(NSString*)review2{
+                    review2:(NSString*)review2
+distanceFromCurrentLocation:(float)distanceFromCurrentLocation{
     self = [super init];
     if (self) {
         _idS = idS;
@@ -34,6 +35,7 @@
         _numberOfReviews = numberOfReviews;
         _review1 = review1;
         _review2 = review2;
+        _distanceFromCurrentLocation = distanceFromCurrentLocation;
     }
     return self;
 }

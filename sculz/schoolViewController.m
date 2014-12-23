@@ -8,6 +8,7 @@
 
 
 #import "schoolViewController.h"
+#import "StarRatingView.h"
 //#import "constants.h"
 
 @interface schoolViewController ()
@@ -18,6 +19,10 @@
 @property (nonatomic, strong) UIButton *beenhereButton;
 @property (nonatomic, strong) UIButton *ratingButton;
 @property (nonatomic, strong) UIAlertController *alertController;
+
+
+// attributes
+
 
 @end
 
@@ -32,7 +37,7 @@
 -(void)makeAlert{
     self.alertController = [UIAlertController
                                           alertControllerWithTitle:@""
-                                          message:@"011-2345768"
+                                          message:self.school.contact
                                           preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction
@@ -183,18 +188,18 @@
             imageView.image = [UIImage imageNamed:@"scl.jpg"];
             
             
-            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 25, 120, 20)];
-            nameLabel.text = @"Abcd school";
+            UILabel *nameLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 15, 250, 20)];
+            nameLabel.text = self.school.name;
             nameLabel.textColor = [UIColor whiteColor];
-            nameLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:18];
+            nameLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
             
             
-            UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 25, 30, 25)];
-            rateLabel.text = @"3.9";
+            UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 15, 30, 25)];
+            rateLabel.text = self.school.rating;
             rateLabel.textAlignment= NSTextAlignmentCenter;
             rateLabel.backgroundColor = [UIColor orangeColor];
             rateLabel.textColor = [UIColor whiteColor];
-            rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:16];
+            rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
             
            
             [imageView addSubview:nameLabel];
@@ -209,11 +214,26 @@
         return cell;
     }
     else if(indexPath.row==1){
-        NSString *simpleTableIdentifier = [NSString stringWithFormat:@"locationCell"];
+        NSString *simpleTableIdentifier = [NSString stringWithFormat:@"addresscell"];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         
         if(cell== nil){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
+            UILabel *addressHeading = [[UILabel alloc] initWithFrame:CGRectMake(25, 5, 270, 15)];
+            addressHeading.font= [UIFont fontWithName:@"Arial-BoldMT" size:10];
+            addressHeading.text = [NSString stringWithFormat:@"ADDRESS"];
+            
+            UILabel *addressLabel = [[UILabel alloc] initWithFrame:CGRectMake(25, 20, 270, 15)];
+            addressLabel.numberOfLines = 0;
+            addressLabel.font= [UIFont fontWithName:@"Arial" size:10];
+            addressLabel.textColor = [UIColor grayColor];
+            addressLabel.text = [NSString stringWithFormat:@"%@",self.school.address];
+            
+            StarRatingView* starView = [[StarRatingView alloc]initWithFrame:CGRectMake(50, 50, 180, 30) andRating:0 withLabel:NO animated:YES];
+            
+            [cell addSubview:addressHeading];
+            [cell addSubview:addressLabel];
+            [cell addSubview:starView];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
