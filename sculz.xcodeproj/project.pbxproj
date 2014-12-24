@@ -13,6 +13,8 @@
 		E239E9F81A486EA300B1F71D /* LoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9F71A486EA300B1F71D /* LoginViewController.m */; };
 		E239E9FC1A493EC800B1F71D /* ServerManager.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9FB1A493EC800B1F71D /* ServerManager.m */; };
 		E239EA001A49A86500B1F71D /* StarRatingView.m in Sources */ = {isa = PBXBuildFile; fileRef = E239E9FF1A49A86500B1F71D /* StarRatingView.m */; };
+		E239EA041A4A962600B1F71D /* FXBlurView.m in Sources */ = {isa = PBXBuildFile; fileRef = E239EA031A4A962600B1F71D /* FXBlurView.m */; };
+		E239EA061A4A96FA00B1F71D /* Accelerate.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E239EA051A4A96FA00B1F71D /* Accelerate.framework */; };
 		E240195D1A43417800E75EBA /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195C1A43417800E75EBA /* main.m */; };
 		E24019601A43417900E75EBA /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E240195F1A43417900E75EBA /* AppDelegate.m */; };
 		E24019631A43417900E75EBA /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E24019621A43417900E75EBA /* ViewController.m */; };
@@ -50,6 +52,9 @@
 		E239E9FB1A493EC800B1F71D /* ServerManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = ServerManager.m; sourceTree = "<group>"; };
 		E239E9FE1A49A86500B1F71D /* StarRatingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = StarRatingView.h; sourceTree = "<group>"; };
 		E239E9FF1A49A86500B1F71D /* StarRatingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = StarRatingView.m; sourceTree = "<group>"; };
+		E239EA021A4A962600B1F71D /* FXBlurView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FXBlurView.h; sourceTree = "<group>"; };
+		E239EA031A4A962600B1F71D /* FXBlurView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FXBlurView.m; sourceTree = "<group>"; };
+		E239EA051A4A96FA00B1F71D /* Accelerate.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Accelerate.framework; path = System/Library/Frameworks/Accelerate.framework; sourceTree = SDKROOT; };
 		E24019571A43417800E75EBA /* sculz.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = sculz.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		E240195B1A43417800E75EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E240195C1A43417800E75EBA /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -81,6 +86,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				E239EA061A4A96FA00B1F71D /* Accelerate.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -97,6 +103,7 @@
 		E239E9EA1A47FD8700B1F71D /* External Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				E239EA011A4A962600B1F71D /* FXBlurView */,
 				E239E9FD1A49A81200B1F71D /* Rating View */,
 				E239E9EB1A4837AB00B1F71D /* RDVTabBarController */,
 			);
@@ -143,9 +150,19 @@
 			name = "Rating View";
 			sourceTree = "<group>";
 		};
+		E239EA011A4A962600B1F71D /* FXBlurView */ = {
+			isa = PBXGroup;
+			children = (
+				E239EA021A4A962600B1F71D /* FXBlurView.h */,
+				E239EA031A4A962600B1F71D /* FXBlurView.m */,
+			);
+			path = FXBlurView;
+			sourceTree = "<group>";
+		};
 		E240194E1A43417800E75EBA = {
 			isa = PBXGroup;
 			children = (
+				E239EA051A4A96FA00B1F71D /* Accelerate.framework */,
 				E24019591A43417800E75EBA /* sculz */,
 				E24019731A43417A00E75EBA /* sculzTests */,
 				E24019581A43417800E75EBA /* Products */,
@@ -382,6 +399,7 @@
 			files = (
 				E2E856CE1A45779400680528 /* school.m in Sources */,
 				E2E856C81A44067900680528 /* schoolViewController.m in Sources */,
+				E239EA041A4A962600B1F71D /* FXBlurView.m in Sources */,
 				E24019631A43417900E75EBA /* ViewController.m in Sources */,
 				E2E856D21A457B6300680528 /* dataModel.m in Sources */,
 				E2E856D51A457CA900680528 /* user.m in Sources */,

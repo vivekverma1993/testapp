@@ -9,6 +9,9 @@
 
 #import "schoolViewController.h"
 #import "StarRatingView.h"
+#import "FXBlurView.h"
+#import "ServerManager.h"
+
 //#import "constants.h"
 
 @interface schoolViewController ()
@@ -19,8 +22,11 @@
 @property (nonatomic, strong) UIButton *beenhereButton;
 @property (nonatomic, strong) UIButton *ratingButton;
 @property (nonatomic, strong) UIAlertController *alertController;
-
-
+@property (nonatomic, strong) FXBlurView *fullBlurView;
+@property (nonatomic, strong) UIView *ratingView;
+@property (nonatomic, strong) StarRatingView* ratingStarsView;
+@property (nonatomic, strong) UIButton *ratingCancelButton;
+@property (nonatomic, strong) UIButton *ratingSubmitButton;
 // attributes
 
 
@@ -29,6 +35,19 @@
 
 @implementation schoolViewController
 
+
+-(void)cancelRating{
+    [self.fullBlurView removeFromSuperview];
+}
+
+-(void)submitRating{
+    //send a request for submitting rating of the user
+    int rating = self.ratingStarsView.rating;
+    rating = (rating*5)/100;
+    NSLog(@"%d",rating);
+   [[ServerManager sharedManager] submitRating:rating :self.school.idS :0];
+    [self.fullBlurView removeFromSuperview];
+}
 
 
 #pragma mark List of actions
@@ -82,7 +101,46 @@
     
 }
 -(void)rateAction{
-    // write a request to send the rating given by the user to the school
+    // call them in view did load just add remove here
+    
+    self.fullBlurView = [[FXBlurView alloc] initWithFrame:self.view.bounds];
+    self.fullBlurView.alpha=0.95;
+    self.fullBlurView.tintColor = [UIColor blackColor];
+    [self.fullBlurView setDynamic:YES];
+    
+    UIColor * btnColor = [UIColor colorWithRed:255/255.0f green:248/255.0f blue:104/255.0f alpha:1.0f];
+    
+    self.ratingStarsView = [[StarRatingView alloc]initWithFrame:CGRectMake(60, 30, 180, 30) andRating:0 withLabel:NO animated:YES];
+//    self.ratingStarsView.r
+    
+    self.ratingCancelButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    self.ratingCancelButton.backgroundColor = btnColor;
+    [self.ratingCancelButton setFrame:CGRectMake(45 , 90 , 100, 40)];
+    [self.ratingCancelButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.ratingCancelButton setTitle:@"Cancel" forState:UIControlStateNormal];
+    self.ratingCancelButton.layer.cornerRadius = 5.0f;
+    [self.ratingCancelButton addTarget:self action:@selector(cancelRating) forControlEvents:UIControlEventTouchUpInside];
+    
+    self.ratingSubmitButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    self.ratingSubmitButton.backgroundColor = btnColor;
+    [self.ratingSubmitButton setFrame:CGRectMake(160 , 90 , 100, 40)];
+    [self.ratingSubmitButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
+    [self.ratingSubmitButton setTitle:@"Submit" forState:UIControlStateNormal];
+    self.ratingSubmitButton.layer.cornerRadius = 5.0f;
+    [self.ratingSubmitButton addTarget:self action:@selector(submitRating) forControlEvents:UIControlEventTouchUpInside];
+
+    
+    self.ratingView = [[UIView alloc] initWithFrame:CGRectMake(10, (self.view.bounds.size.height/2)-50, 300 , 150)];
+    self.ratingView.backgroundColor = [UIColor colorWithRed:190/255.0f green:98/255.0f blue:126/255.0f alpha:1.0f];
+    self.ratingView.layer.cornerRadius = 5.0f;
+    self.ratingView.alpha = 1.0;
+    
+    [self.ratingView addSubview:self.ratingStarsView];
+    [self.ratingView addSubview:self.ratingCancelButton];
+    [self.ratingView addSubview:self.ratingSubmitButton];
+    [self.fullBlurView addSubview:self.ratingView];
+    [self.view addSubview:self.fullBlurView];
+
 }
 
 
@@ -201,7 +259,11 @@
             rateLabel.textColor = [UIColor whiteColor];
             rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
             
-           
+            FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, cellHeight)];
+            blurView.alpha=0.95;
+            blurView.tintColor = [UIColor blackColor];
+            [blurView setDynamic:NO];
+            [imageView addSubview:blurView];
             [imageView addSubview:nameLabel];
             [imageView addSubview:rateLabel];
             
@@ -229,11 +291,9 @@
             addressLabel.textColor = [UIColor grayColor];
             addressLabel.text = [NSString stringWithFormat:@"%@",self.school.address];
             
-            StarRatingView* starView = [[StarRatingView alloc]initWithFrame:CGRectMake(50, 50, 180, 30) andRating:0 withLabel:NO animated:YES];
             
             [cell addSubview:addressHeading];
             [cell addSubview:addressLabel];
-            [cell addSubview:starView];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;

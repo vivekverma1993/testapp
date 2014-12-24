@@ -92,4 +92,38 @@
 
 }
 
+
+-(void)submitRating:(int)rating :(int)schoolId : (int)userId{
+    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/post?ID=%d&rating=%d",schoolId ,rating];
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    //Making the MutableURLrequest & configuring it (POST) to add more headers/data to it.
+    NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:URL];
+    [postRequest setTimeoutInterval:60];
+    [postRequest setHTTPMethod:@"POST"];
+    
+    //Creating the URL session and corresponding configuration
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    
+//    NSString *post = [[NSString alloc] initWithFormat:@"ID=%d&rating=%d",schoolId ,rating];
+//    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
+//    
+//    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+//    [postRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+//    [postRequest setHTTPBody:postData];
+    
+    [[session dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *myResponse = (NSHTTPURLResponse*) response;
+        NSLog(@"my status code is %ld" , (long)myResponse.statusCode);
+        if (myResponse.statusCode == 200)
+        {
+            NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+        }
+    }] resume];
+    
+    sleep(2);
+
+}
+
 @end

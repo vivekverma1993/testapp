@@ -10,14 +10,7 @@
 #define kLeftPadding 5.0f
 
 @interface StarRatingView()
-@property (nonatomic) int userRating;
-@property (nonatomic) int maxrating;
-@property (nonatomic) int rating;
-@property (nonatomic) BOOL animated;
-@property (nonatomic) float kLabelAllowance;
-@property (nonatomic,strong) NSTimer* timer;
-@property (nonatomic,strong) UILabel* label;
-@property (nonatomic,strong) CALayer* tintLayer;
+
 
 @end
 
@@ -62,7 +55,7 @@
         tintLayer = [CALayer layer];
         tintLayer.frame = CGRectMake(0, 0, 0, self.bounds.size.height);
         if (self.userRating >=20.0f) {
-            [tintLayer setBackgroundColor:[UIColor greenColor].CGColor];
+            [tintLayer setBackgroundColor:[UIColor yellowColor].CGColor];
         }else{
             [tintLayer setBackgroundColor:[UIColor yellowColor].CGColor];
         }
@@ -109,7 +102,7 @@
         float barWitdhPercentage = (_maxrating/100.0f) *  (self.bounds.size.width-kLabelAllowance);
         self.tintLayer.frame = CGRectMake(0, 0, barWitdhPercentage, self.frame.size.height);
     }else{
-        [self.tintLayer setBackgroundColor:[UIColor greenColor].CGColor];
+        [self.tintLayer setBackgroundColor:[UIColor yellowColor].CGColor];
         float barWitdhPercentage = (_rating/100.0f) *  (self.bounds.size.width-kLabelAllowance);
         self.tintLayer.frame = CGRectMake(0, 0, barWitdhPercentage, self.frame.size.height);
     }

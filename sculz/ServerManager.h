@@ -14,4 +14,6 @@
 
 -(void)getNearbySchools:(float)lat :(float)lon : (NSString *)token;
 
+-(void)submitRating:(int)rating :(int)schoolId : (int)userId;
+
 @end
