@@ -21,6 +21,10 @@
 @implementation NearbySchoolViewController
 
 
+-(void)viewWillAppear:(BOOL)animated{
+    [self.tableView reloadData];
+}
+
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
     self = [super initWithNibName:nibNameOrNil bundle:nibBundleOrNil];
@@ -172,7 +176,7 @@
 {
     if(indexPath.row!=0){
         [[dataModel sharedManager] setPresentSchool:((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1])];
-    
+        [[dataModel sharedManager] setPresentSchoolIndex:(int)indexPath.row-1];
         NSLog(@"current user property id is %@",((school *)[[dataModel sharedManager] presentSchool]).name);
     
         
@@ -181,6 +185,7 @@
         // do any setup you need for myNewVC
         
         //[self presentModalViewController:myNewVC animated:YES];
+        
         [self performSegueWithIdentifier:@"schoolDetail" sender:self];
     }
     
@@ -196,7 +201,7 @@
         
         // Pass any objects to the view controller here, like...
         vc.school = [[dataModel sharedManager] presentSchool];
-        
+        vc.schoolIndex = [[dataModel sharedManager] presentSchoolIndex];
     }
     
 }

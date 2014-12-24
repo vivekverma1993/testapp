@@ -65,8 +65,8 @@
                         [format setMinimumFractionDigits:1];
                         
                         
-                        NSLog(@"id of current school is %@",[format stringFromNumber:[NSNumber numberWithFloat:value]]);
-                        tempSchool = [[school alloc] initWithIdS:(int)item[@"results"][i][@"id"]
+                        NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
+                        tempSchool = [[school alloc] initWithIdS:(int)[item[@"results"][i][@"id"] integerValue]
                                                             name:item[@"results"][i][@"name"]
                                                          address:item[@"results"][i][@"address"]
                                                          contact:item[@"results"][i][@"contact"]
@@ -77,7 +77,9 @@
                                                  numberOfReviews:0
                                                          review1:[NSString stringWithFormat:@"it is best"]
                                                          review2:[NSString stringWithFormat:@"great school"]
-                                     distanceFromCurrentLocation:[item[@"results"][i][@"distance"] floatValue]];
+                                     distanceFromCurrentLocation:[item[@"results"][i][@"distance"] floatValue]
+                                                isRatedByCurrent:NO
+                                               currentUserRating:0];
     
                         [arr addObject:(school*)tempSchool];
                         i++;

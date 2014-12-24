@@ -13,6 +13,7 @@
 @interface dataModel : NSObject
 
 @property(nonatomic) school *presentSchool;
+@property(nonatomic) int presentSchoolIndex;
 @property(nonatomic) NSMutableArray *nearbySchools;
 @property (strong, nonatomic) UIWindow *window;
 

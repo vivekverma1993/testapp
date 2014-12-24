@@ -22,6 +22,8 @@
 @property(nonatomic) NSString *review1;
 @property(nonatomic) NSString *review2;
 @property(nonatomic) float distanceFromCurrentLocation;
+@property(nonatomic) BOOL isRatedByCurrent;
+@property(nonatomic) NSString *currentUserRating;
 
 - (instancetype)initWithIdS:(int)idS
                        name:(NSString*)name
@@ -34,7 +36,8 @@
              numberOfReviews:(int)numberOfReviews
                     review1:(NSString*)review1
                     review2:(NSString*)review2
-distanceFromCurrentLocation:(float)distanceFromCurrentLocation;
-
+distanceFromCurrentLocation:(float)distanceFromCurrentLocation
+           isRatedByCurrent:(BOOL) isRatedByCurrent
+          currentUserRating:(NSString*)currentUserRating;
 
 @end

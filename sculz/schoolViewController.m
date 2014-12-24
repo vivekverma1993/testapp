@@ -11,6 +11,7 @@
 #import "StarRatingView.h"
 #import "FXBlurView.h"
 #import "ServerManager.h"
+#import "dataModel.h"
 
 //#import "constants.h"
 
@@ -36,6 +37,19 @@
 @implementation schoolViewController
 
 
+-(void)changeRatingButton{
+    [self.ratingButton removeFromSuperview];
+    self.ratingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
+    [self.ratingButton setFrame:CGRectMake(265, 5, 30, 30)];
+    self.ratingButton.layer.cornerRadius = 15.0f;
+    
+    self.ratingButton.backgroundColor= [UIColor orangeColor];
+    [self.ratingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+    [self.ratingButton setTitle:[NSString stringWithFormat:@"%@",self.school.currentUserRating] forState:UIControlStateNormal];
+    [self.ratingButton addTarget:self action:@selector(rateAction) forControlEvents:UIControlEventTouchUpInside];
+    
+}
+
 -(void)cancelRating{
     [self.fullBlurView removeFromSuperview];
 }
@@ -45,8 +59,23 @@
     int rating = self.ratingStarsView.rating;
     rating = (rating*5)/100;
     NSLog(@"%d",rating);
+    // this should be done after recieving notification from the server manager
+    [self changeRatingButton];
+    [self.school setIsRatedByCurrent:YES];
+    [self.school setCurrentUserRating:[NSString stringWithFormat:@"%d",rating]];
+    if([self.school.rating isEqualToString:@"0.0"]){
+        [self.school setRating:[NSString stringWithFormat:@"%d",rating]];
+    }
+    else{
+        float newRating = (([self.school.rating floatValue]*self.school.numberOfRaters)+rating)/(self.school.numberOfRaters+1);
+        [self.school setRating:[NSString stringWithFormat:@"%f",newRating]];
+    }
+    [self.school setNumberOfRaters:self.school.numberOfRaters+1];
+    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    //
    [[ServerManager sharedManager] submitRating:rating :self.school.idS :0];
     [self.fullBlurView removeFromSuperview];
+    [self.tableView reloadData];
 }
 
 
@@ -56,7 +85,7 @@
 -(void)makeAlert{
     self.alertController = [UIAlertController
                                           alertControllerWithTitle:@""
-                                          message:self.school.contact
+                            message:[NSString stringWithFormat:@"%@",self.school.contact]
                                           preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *cancelAction = [UIAlertAction
@@ -172,15 +201,21 @@
     [self.beenhereButton setFrame:CGRectMake(185, 5, 30, 30)];
     self.beenhereButton.layer.cornerRadius = 15.0f;
     self.beenhereButton.backgroundColor = [UIColor grayColor];
-
     
     self.ratingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
-    [self.ratingButton setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
-    [self.ratingButton addTarget:self action:@selector(rateAction) forControlEvents:UIControlEventTouchUpInside];
-    
     [self.ratingButton setFrame:CGRectMake(265, 5, 30, 30)];
     self.ratingButton.layer.cornerRadius = 15.0f;
-    self.ratingButton.backgroundColor = [UIColor grayColor];
+    
+    if(self.school.isRatedByCurrent){
+        self.ratingButton.backgroundColor= [UIColor orangeColor];
+        [self.ratingButton setTitleColor:[UIColor whiteColor] forState:UIControlStateNormal];
+        [self.ratingButton setTitle:[NSString stringWithFormat:@"%@",self.school.currentUserRating] forState:UIControlStateNormal];
+    }
+    else{
+        [self.ratingButton setImage:[UIImage imageNamed:@"star"] forState:UIControlStateNormal];
+        self.ratingButton.backgroundColor = [UIColor grayColor];
+    }
+    [self.ratingButton addTarget:self action:@selector(rateAction) forControlEvents:UIControlEventTouchUpInside];
     
     
     [self.downButtonView addSubview:self.callButton];

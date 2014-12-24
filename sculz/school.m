@@ -21,7 +21,9 @@
             numberOfReviews:(int)numberOfReviews
                     review1:(NSString*)review1
                     review2:(NSString*)review2
-distanceFromCurrentLocation:(float)distanceFromCurrentLocation{
+distanceFromCurrentLocation:(float)distanceFromCurrentLocation
+           isRatedByCurrent:(BOOL) isRatedByCurrent
+          currentUserRating:(NSString*)currentUserRating{
     self = [super init];
     if (self) {
         _idS = idS;
@@ -36,6 +38,8 @@ distanceFromCurrentLocation:(float)distanceFromCurrentLocation{
         _review1 = review1;
         _review2 = review2;
         _distanceFromCurrentLocation = distanceFromCurrentLocation;
+        _isRatedByCurrent = isRatedByCurrent;
+        _currentUserRating = currentUserRating;
     }
     return self;
 }
