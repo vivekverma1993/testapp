@@ -12,8 +12,10 @@
 
 +(id) sharedManager;
 
--(void)getNearbySchools:(float)lat :(float)lon : (NSString *)token;
+-(void)getNearbySchools:(float)lat :(float)lon : (NSString *)userId;
 
 -(void)submitRating:(int)rating :(int)schoolId : (int)userId;
+
+-(void)isLoggedIn:(NSString *)username :(NSString *)password;
 
 @end

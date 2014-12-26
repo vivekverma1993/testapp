@@ -58,6 +58,12 @@
     
     //[[self rdv_tabBarItem] setBadgeValue:@"3"];
     
+    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0f green:18/255.0f blue:13/255.0f alpha:1.0f];
+    
+    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
+    
+    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
                                                0,

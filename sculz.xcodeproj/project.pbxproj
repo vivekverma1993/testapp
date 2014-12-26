@@ -68,6 +68,15 @@
 		E24019701A43417A00E75EBA /* sculzTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = sculzTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		E24019751A43417A00E75EBA /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		E24019761A43417A00E75EBA /* sculzTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = sculzTests.m; sourceTree = "<group>"; };
+		E24381F01A4BF4C000DBEA85 /* Parse.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Parse.framework; path = "../../Downloads/LoginAndSignUpTutorial-master/Parse.framework"; sourceTree = "<group>"; };
+		E24381F21A4BFCE900DBEA85 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		E24381F41A4BFCF300DBEA85 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		E24381F61A4BFD0200DBEA85 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		E24381F81A4BFD1400DBEA85 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		E24381FA1A4BFD2500DBEA85 /* libz.1.1.3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.1.1.3.dylib; path = usr/lib/libz.1.1.3.dylib; sourceTree = SDKROOT; };
+		E24381FC1A4BFD3000DBEA85 /* MobileCoreServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MobileCoreServices.framework; path = System/Library/Frameworks/MobileCoreServices.framework; sourceTree = SDKROOT; };
+		E24381FE1A4BFD4000DBEA85 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		E24382001A4BFD4A00DBEA85 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 		E2E856C61A44067900680528 /* schoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolViewController.h; sourceTree = "<group>"; };
 		E2E856C71A44067900680528 /* schoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolViewController.m; sourceTree = "<group>"; };
 		E2E856CA1A44078600680528 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -162,10 +171,10 @@
 		E240194E1A43417800E75EBA = {
 			isa = PBXGroup;
 			children = (
-				E239EA051A4A96FA00B1F71D /* Accelerate.framework */,
 				E24019591A43417800E75EBA /* sculz */,
 				E24019731A43417A00E75EBA /* sculzTests */,
 				E24019581A43417800E75EBA /* Products */,
+				E24381EF1A4BF45000DBEA85 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -223,6 +232,23 @@
 				E24019751A43417A00E75EBA /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E24381EF1A4BF45000DBEA85 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E24382001A4BFD4A00DBEA85 /* StoreKit.framework */,
+				E24381FE1A4BFD4000DBEA85 /* QuartzCore.framework */,
+				E24381FC1A4BFD3000DBEA85 /* MobileCoreServices.framework */,
+				E24381FA1A4BFD2500DBEA85 /* libz.1.1.3.dylib */,
+				E24381F81A4BFD1400DBEA85 /* CoreGraphics.framework */,
+				E24381F61A4BFD0200DBEA85 /* CoreLocation.framework */,
+				E24381F41A4BFCF300DBEA85 /* CFNetwork.framework */,
+				E24381F21A4BFCE900DBEA85 /* AudioToolbox.framework */,
+				E24381F01A4BF4C000DBEA85 /* Parse.framework */,
+				E239EA051A4A96FA00B1F71D /* Accelerate.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		E2E856C51A4405E200680528 /* Views */ = {
@@ -457,6 +483,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -489,7 +516,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
-				ONLY_ACTIVE_ARCH = YES;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 			};
 			name = Debug;
@@ -498,6 +525,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
 				CLANG_ENABLE_MODULES = YES;
@@ -524,6 +552,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
+				ONLY_ACTIVE_ARCH = NO;
 				SDKROOT = iphoneos;
 				VALIDATE_PRODUCT = YES;
 			};
@@ -533,11 +562,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/vivek/Downloads/LoginAndSignUpTutorial-master",
+				);
 				INFOPLIST_FILE = sculz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Debug;
 		};
@@ -545,11 +579,16 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"/Users/vivek/Downloads/LoginAndSignUpTutorial-master",
+				);
 				INFOPLIST_FILE = sculz/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				TARGETED_DEVICE_FAMILY = 1;
+				VALID_ARCHS = "armv7 armv7s arm64";
 			};
 			name = Release;
 		};

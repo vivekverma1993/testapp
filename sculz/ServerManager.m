@@ -9,6 +9,8 @@
 #import "ServerManager.h"
 #import "dataModel.h"
 #import "school.h"
+#import "schoolViewController.h"
+#import "LoginViewController.h"
 
 @implementation ServerManager
 
@@ -22,8 +24,64 @@
     return sharedMyManager;
 }
 
--(void)getNearbySchools:(float)lat :(float)lon : (NSString *)token{
-    NSString *urlRequest = [NSString stringWithFormat:@"http://localhost:8888/nearby?lat=%f&lon=%f",lat,lon];
+-(void)isLoggedIn:(NSString *)username :(NSString *)password{
+    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/login?username=%@&password=%@", username, password];
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    //Making the MutableURLrequest & configuring it (POST) to add more headers/data to it.
+    NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:URL];
+    [postRequest setTimeoutInterval:60];
+    [postRequest setHTTPMethod:@"POST"];
+    
+    //Creating the URL session and corresponding configuration
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    
+    [[session dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *myResponse = (NSHTTPURLResponse*) response;
+        NSLog(@"my status code is %ld" , (long)myResponse.statusCode);
+        if (myResponse.statusCode == 200)
+        {
+            NSDictionary  *item = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            
+            NSString *loggedIn = item[@"isLoggedIn"];
+            
+            if([loggedIn boolValue]){
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSString *idU = item[@"userDetails"][@"id"];
+                    NSString *name = item[@"userDetails"][@"name"];
+                    NSArray *keys = [NSArray arrayWithObjects:@"id",@"name", nil];
+                    NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",idU],[NSString stringWithFormat:@"%@",name], nil];
+                    NSDictionary *loginDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"loginSuccessful" object:LoginViewController.class userInfo:loginDesc];
+                });
+            }
+            else{
+                dispatch_async(dispatch_get_main_queue(), ^{
+                    NSArray *keys = [NSArray arrayWithObjects:@"reason", nil];
+                    NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"Incorrect Password!!"], nil];
+                    NSDictionary *loginDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"loginUnSuccessful" object:LoginViewController.class userInfo:loginDesc];
+                });
+            }
+            
+        }
+        else{
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray *keys = [NSArray arrayWithObjects:@"reason", nil];
+                NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"username doesn't exists!!"], nil];
+                NSDictionary *loginDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"loginUnSuccessful" object:LoginViewController.class userInfo:loginDesc];
+            });
+        }
+    }] resume];
+    
+    sleep(2);
+
+}
+
+-(void)getNearbySchools:(float)lat :(float)lon : (NSString *)userId{
+    NSString *urlRequest = [NSString stringWithFormat:@"http://localhost:8888/nearby?lat=%f&lon=%f&user=%@",lat,lon,userId];
     NSURL *URL = [NSURL URLWithString:urlRequest];
     
     //Making the MutableURLrequest & configuring it (GET) to add more headers to it.
@@ -65,6 +123,7 @@
                         [format setMinimumFractionDigits:1];
                         
                         
+                        
                         NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
                         tempSchool = [[school alloc] initWithIdS:(int)[item[@"results"][i][@"id"] integerValue]
                                                             name:item[@"results"][i][@"name"]
@@ -78,14 +137,15 @@
                                                          review1:[NSString stringWithFormat:@"it is best"]
                                                          review2:[NSString stringWithFormat:@"great school"]
                                      distanceFromCurrentLocation:[item[@"results"][i][@"distance"] floatValue]
-                                                isRatedByCurrent:NO
-                                               currentUserRating:0];
+                                                isRatedByCurrent:[item[@"results"][i][@"isRatedByUser"] boolValue]
+                                               currentUserRating:item[@"results"][i][@"userRating"]];
     
                         [arr addObject:(school*)tempSchool];
                         i++;
                     }
                     [[dataModel sharedManager] setNearbySchools:(NSMutableArray *)arr];
                     NSLog(@"total number of friends is %ld",(long)[[[dataModel sharedManager] nearbySchools] count]);
+                    
                 }
             }
         }
@@ -120,7 +180,25 @@
         NSLog(@"my status code is %ld" , (long)myResponse.statusCode);
         if (myResponse.statusCode == 200)
         {
+            NSDictionary  *item = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            
+            NSNumberFormatter *format = [[NSNumberFormatter alloc]init];
+            [format setNumberStyle:NSNumberFormatterDecimalStyle];
+            [format setRoundingMode:NSNumberFormatterRoundHalfUp];
+            [format setMaximumFractionDigits:1];
+            [format setMinimumFractionDigits:1];
+            
+            NSString *newRating = [format stringFromNumber:[NSNumber numberWithFloat:[item[@"result"][@"newRating"] floatValue]]];
+            int totalRatings = (int)[item[@"result"][@"total_ratings"] integerValue];
+            NSString *userRating = item[@"result"][@"currUserRating"];
+            
             NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray *keys = [NSArray arrayWithObjects:@"newRating",@"totalRatings",@"userRating", nil];
+                NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",newRating],[NSString stringWithFormat:@"%d",totalRatings],[NSString stringWithFormat:@"%@",userRating], nil];
+                NSDictionary *ratingDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ratingSubmitted" object:schoolViewController.class userInfo:ratingDesc];
+            });
         }
     }] resume];
     

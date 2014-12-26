@@ -9,7 +9,7 @@
 
 #import "schoolViewController.h"
 #import "StarRatingView.h"
-#import "FXBlurView.h"
+#import "FXBlurView/FXBlurView.h"
 #import "ServerManager.h"
 #import "dataModel.h"
 
@@ -39,6 +39,7 @@
 
 -(void)changeRatingButton{
     [self.ratingButton removeFromSuperview];
+    self.ratingButton = nil;
     self.ratingButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [self.ratingButton setFrame:CGRectMake(265, 5, 30, 30)];
     self.ratingButton.layer.cornerRadius = 15.0f;
@@ -48,6 +49,24 @@
     [self.ratingButton setTitle:[NSString stringWithFormat:@"%@",self.school.currentUserRating] forState:UIControlStateNormal];
     [self.ratingButton addTarget:self action:@selector(rateAction) forControlEvents:UIControlEventTouchUpInside];
     
+    [self.downButtonView addSubview:self.ratingButton];
+    
+}
+
+-(void)ratingSubmitted:(NSNotification *)ratingInfo{
+    NSDictionary *dict = [ratingInfo userInfo];
+    NSString *newRating = [dict objectForKey:@"newRating"];
+    int totalRating = (int)[[dict objectForKey:@"totalRatings"] integerValue];
+    NSString *rating = [dict objectForKey:@"userRating"];
+    [self.school setIsRatedByCurrent:YES];
+    [self.school setCurrentUserRating:rating];
+    [self.school setRating:newRating];
+    [self.school setNumberOfRaters:totalRating];
+    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    [self changeRatingButton];
+    [self.fullBlurView removeFromSuperview];
+    [self.tableView reloadData];
+
 }
 
 -(void)cancelRating{
@@ -55,27 +74,10 @@
 }
 
 -(void)submitRating{
-    //send a request for submitting rating of the user
     int rating = self.ratingStarsView.rating;
     rating = (rating*5)/100;
     NSLog(@"%d",rating);
-    // this should be done after recieving notification from the server manager
-    [self changeRatingButton];
-    [self.school setIsRatedByCurrent:YES];
-    [self.school setCurrentUserRating:[NSString stringWithFormat:@"%d",rating]];
-    if([self.school.rating isEqualToString:@"0.0"]){
-        [self.school setRating:[NSString stringWithFormat:@"%d",rating]];
-    }
-    else{
-        float newRating = (([self.school.rating floatValue]*self.school.numberOfRaters)+rating)/(self.school.numberOfRaters+1);
-        [self.school setRating:[NSString stringWithFormat:@"%f",newRating]];
-    }
-    [self.school setNumberOfRaters:self.school.numberOfRaters+1];
-    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
-    //
-   [[ServerManager sharedManager] submitRating:rating :self.school.idS :0];
-    [self.fullBlurView removeFromSuperview];
-    [self.tableView reloadData];
+    [[ServerManager sharedManager] submitRating:rating :self.school.idS :0];
 }
 
 
@@ -232,12 +234,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0f green:18/255.0f blue:13/255.0f alpha:1.0f];
-    
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
-    
     // Do any additional setup after loading the view.
     self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, 320, self.view.bounds.size.height-64)];
     
@@ -248,8 +244,12 @@
     
     [self.view addSubview:self.tableView];
     
-    
     [self makeAlert];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(ratingSubmitted:)
+                                                 name:@"ratingSubmitted"
+                                               object:nil];
     
     
 }

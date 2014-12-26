@@ -19,6 +19,7 @@
         sharedMyManager.nearbySchools = [[NSMutableArray alloc] init];
         sharedMyManager.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         sharedMyManager.presentSchoolIndex = -1;
+        sharedMyManager.presentUser = [[user alloc] init];
     });
     return sharedMyManager;
 }
