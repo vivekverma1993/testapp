@@ -90,5 +90,24 @@
             </objects>
             <point key="canvasLocation" x="1061.5" y="1111.5"/>
         </scene>
+        <!--Neaby Map View Controller-->
+        <scene sceneID="vQB-NX-mq5">
+            <objects>
+                <viewController id="6YT-qv-iPh" customClass="NeabyMapViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="rJl-Vs-Dou"/>
+                        <viewControllerLayoutGuide type="bottom" id="p1i-Iu-Lnt"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="JQh-rS-4Re">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="gZk-JT-6eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1061.5" y="1891.5"/>
+        </scene>
     </scenes>
 </document>

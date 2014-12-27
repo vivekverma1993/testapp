@@ -145,7 +145,7 @@
                     }
                     [[dataModel sharedManager] setNearbySchools:(NSMutableArray *)arr];
                     NSLog(@"total number of friends is %ld",(long)[[[dataModel sharedManager] nearbySchools] count]);
-                    
+                    [[NSNotificationCenter defaultCenter] postNotificationName:@"propertiesFetched" object:LoginViewController.class];
                 }
             }
         }
@@ -156,7 +156,7 @@
 
 
 -(void)submitRating:(int)rating :(int)schoolId : (int)userId{
-    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/post?ID=%d&rating=%d",schoolId ,rating];
+    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/post?ID=%d&rating=%d&user=%d",schoolId ,rating,userId];
     NSURL *URL = [NSURL URLWithString:URLString];
     
     //Making the MutableURLrequest & configuring it (POST) to add more headers/data to it.
@@ -198,6 +198,57 @@
                 NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",newRating],[NSString stringWithFormat:@"%d",totalRatings],[NSString stringWithFormat:@"%@",userRating], nil];
                 NSDictionary *ratingDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
                 [[NSNotificationCenter defaultCenter] postNotificationName:@"ratingSubmitted" object:schoolViewController.class userInfo:ratingDesc];
+            });
+        }
+    }] resume];
+    
+    sleep(2);
+
+}
+
+
+-(void)changeRating:(int)rating :(int)oldRating :(int)schoolId : (int)userId{
+    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/change?ID=%d&rating=%d&oldRating=%d&user=%d",schoolId ,rating,oldRating,userId];
+    NSURL *URL = [NSURL URLWithString:URLString];
+    
+    //Making the MutableURLrequest & configuring it (POST) to add more headers/data to it.
+    NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:URL];
+    [postRequest setTimeoutInterval:60];
+    [postRequest setHTTPMethod:@"POST"];
+    
+    //Creating the URL session and corresponding configuration
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    
+    //    NSString *post = [[NSString alloc] initWithFormat:@"ID=%d&rating=%d",schoolId ,rating];
+    //    NSData *postData = [post dataUsingEncoding:NSUTF8StringEncoding];
+    //
+    //    NSString *postLength = [NSString stringWithFormat:@"%lu", (unsigned long)[postData length]];
+    //    [postRequest setValue:postLength forHTTPHeaderField:@"Content-Length"];
+    //    [postRequest setHTTPBody:postData];
+    
+    [[session dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *myResponse = (NSHTTPURLResponse*) response;
+        NSLog(@"my status code is %ld" , (long)myResponse.statusCode);
+        if (myResponse.statusCode == 200)
+        {
+            NSDictionary  *item = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            
+            NSNumberFormatter *format = [[NSNumberFormatter alloc]init];
+            [format setNumberStyle:NSNumberFormatterDecimalStyle];
+            [format setRoundingMode:NSNumberFormatterRoundHalfUp];
+            [format setMaximumFractionDigits:1];
+            [format setMinimumFractionDigits:1];
+            
+            NSString *newRating = [format stringFromNumber:[NSNumber numberWithFloat:[item[@"result"][@"newRating"] floatValue]]];
+            NSString *userRating = item[@"result"][@"currUserRating"];
+            
+            NSLog(@"%@",[[NSString alloc] initWithData:data encoding:NSASCIIStringEncoding]);
+            dispatch_async(dispatch_get_main_queue(), ^{
+                NSArray *keys = [NSArray arrayWithObjects:@"newRating",@"userRating", nil];
+                NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",newRating],[NSString stringWithFormat:@"%@",userRating], nil];
+                NSDictionary *ratingDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];
+                [[NSNotificationCenter defaultCenter] postNotificationName:@"ratingChanged" object:schoolViewController.class userInfo:ratingDesc];
             });
         }
     }] resume];

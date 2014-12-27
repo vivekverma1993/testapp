@@ -16,6 +16,8 @@
 
 -(void)submitRating:(int)rating :(int)schoolId : (int)userId;
 
+-(void)changeRating:(int)rating :(int)oldRating :(int)schoolId : (int)userId;
+
 -(void)isLoggedIn:(NSString *)username :(NSString *)password;
 
 @end

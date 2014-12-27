@@ -28,6 +28,8 @@
 @property (nonatomic, strong) StarRatingView* ratingStarsView;
 @property (nonatomic, strong) UIButton *ratingCancelButton;
 @property (nonatomic, strong) UIButton *ratingSubmitButton;
+@property (nonatomic, strong) UIActivityIndicatorView *mySpinner;
+ 
 // attributes
 
 
@@ -35,6 +37,11 @@
 
 
 @implementation schoolViewController
+
+-(void)modifyRatingButton{
+    [self.ratingButton setTitle:[NSString stringWithFormat:@"%@",self.school.currentUserRating] forState:UIControlStateNormal];
+    [self.mySpinner stopAnimating];
+}
 
 
 -(void)changeRatingButton{
@@ -50,7 +57,19 @@
     [self.ratingButton addTarget:self action:@selector(rateAction) forControlEvents:UIControlEventTouchUpInside];
     
     [self.downButtonView addSubview:self.ratingButton];
-    
+    [self.mySpinner stopAnimating];
+}
+
+-(void)ratingChanged:(NSNotification *)ratingInfo{
+    NSDictionary *dict = [ratingInfo userInfo];
+    NSString *newRating = [dict objectForKey:@"newRating"];
+    NSString *rating = [dict objectForKey:@"userRating"];
+    [self.school setCurrentUserRating:rating];
+    [self.school setRating:newRating];
+    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    [self modifyRatingButton];
+    [self.fullBlurView removeFromSuperview];
+    //[self.tableView reloadData];
 }
 
 -(void)ratingSubmitted:(NSNotification *)ratingInfo{
@@ -65,7 +84,7 @@
     [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
     [self changeRatingButton];
     [self.fullBlurView removeFromSuperview];
-    [self.tableView reloadData];
+    //[self.tableView reloadData];
 
 }
 
@@ -75,9 +94,17 @@
 
 -(void)submitRating{
     int rating = self.ratingStarsView.rating;
+    NSLog(@"full rating is %d", rating);
     rating = (rating*5)/100;
-    NSLog(@"%d",rating);
-    [[ServerManager sharedManager] submitRating:rating :self.school.idS :0];
+    NSLog(@"new rating is - %d and old rating was%d",rating,(int)[self.school.currentUserRating integerValue]);
+    [self.mySpinner startAnimating];
+    if(self.school.isRatedByCurrent){
+        [[ServerManager sharedManager] changeRating:rating :(int)[self.school.currentUserRating integerValue] :(int)self.school.idS :((user*)[[dataModel sharedManager] presentUser]).idU];
+    }
+    else{
+        [[ServerManager sharedManager] submitRating:rating :self.school.idS :((user*)[[dataModel sharedManager] presentUser]).idU];
+    }
+
 }
 
 
@@ -141,8 +168,11 @@
     
     UIColor * btnColor = [UIColor colorWithRed:255/255.0f green:248/255.0f blue:104/255.0f alpha:1.0f];
     
-    self.ratingStarsView = [[StarRatingView alloc]initWithFrame:CGRectMake(60, 30, 180, 30) andRating:0 withLabel:NO animated:YES];
-//    self.ratingStarsView.r
+    int Rating = 0;
+    if(self.school.isRatedByCurrent){
+        Rating = (int)[self.school.currentUserRating integerValue]*20;
+    }
+    self.ratingStarsView = [[StarRatingView alloc]initWithFrame:CGRectMake(60, 30, 180, 30) andRating:Rating withLabel:NO animated:YES];
     
     self.ratingCancelButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     self.ratingCancelButton.backgroundColor = btnColor;
@@ -156,7 +186,11 @@
     self.ratingSubmitButton.backgroundColor = btnColor;
     [self.ratingSubmitButton setFrame:CGRectMake(160 , 90 , 100, 40)];
     [self.ratingSubmitButton setTitleColor:[UIColor blackColor] forState:UIControlStateNormal];
-    [self.ratingSubmitButton setTitle:@"Submit" forState:UIControlStateNormal];
+    NSString *buttonText = @"Submit";
+    if(self.school.isRatedByCurrent){
+        buttonText = @"Change";
+    }
+    [self.ratingSubmitButton setTitle:buttonText forState:UIControlStateNormal];
     self.ratingSubmitButton.layer.cornerRadius = 5.0f;
     [self.ratingSubmitButton addTarget:self action:@selector(submitRating) forControlEvents:UIControlEventTouchUpInside];
 
@@ -246,9 +280,19 @@
     
     [self makeAlert];
     
+    self.mySpinner = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+    self.mySpinner.center = CGPointMake(160, 240);
+    self.mySpinner.hidesWhenStopped = YES;
+    [self.view addSubview:self.mySpinner];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self
                                              selector:@selector(ratingSubmitted:)
                                                  name:@"ratingSubmitted"
+                                               object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(ratingChanged:)
+                                                 name:@"ratingChanged"
                                                object:nil];
     
     
