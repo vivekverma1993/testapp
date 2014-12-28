@@ -22,13 +22,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [self.navigationController.navigationBar  setBarTintColor:[UIColor redColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
+    
+    self.navigationItem.title = @"Mapview";
+
     double lon = 77.2274863;
     double lat = 28.5723769;
     
     self.mapView = [[GMSMapView alloc] init];
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:lat
                                                             longitude:lon
-                                                                 zoom:12];
+                                                                 zoom:13];
     self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 64, 320, self.view.bounds.size.height-64) camera:camera];
     self.mapView.settings.zoomGestures = YES;
     self.mapView.settings.scrollGestures = YES;

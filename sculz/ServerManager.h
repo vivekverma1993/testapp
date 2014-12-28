@@ -14,6 +14,8 @@
 
 -(void)getNearbySchools:(float)lat :(float)lon : (NSString *)userId;
 
+-(void)getDistrictSchools:(float)lat :(float)lon : (NSString *)userId :(NSString *)district;
+
 -(void)submitRating:(int)rating :(int)schoolId : (int)userId;
 
 -(void)changeRating:(int)rating :(int)oldRating :(int)schoolId : (int)userId;

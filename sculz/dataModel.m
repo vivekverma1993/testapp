@@ -20,6 +20,8 @@
         sharedMyManager.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
         sharedMyManager.presentSchoolIndex = -1;
         sharedMyManager.presentUser = [[user alloc] init];
+        sharedMyManager.districtSchools = [[NSMutableArray alloc] init];
+        sharedMyManager.currentZone = [[NSString alloc] init];
     });
     return sharedMyManager;
 }

@@ -66,7 +66,13 @@
     NSString *rating = [dict objectForKey:@"userRating"];
     [self.school setCurrentUserRating:rating];
     [self.school setRating:newRating];
-    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    if(self.type==0){
+        [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    }
+    else{
+        [[[dataModel sharedManager] districtSchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    }
+    
     [self modifyRatingButton];
     [self.fullBlurView removeFromSuperview];
     //[self.tableView reloadData];
@@ -81,7 +87,12 @@
     [self.school setCurrentUserRating:rating];
     [self.school setRating:newRating];
     [self.school setNumberOfRaters:totalRating];
-    [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    if(self.type==0){
+        [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    }
+    else{
+        [[[dataModel sharedManager] districtSchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
+    }
     [self changeRatingButton];
     [self.fullBlurView removeFromSuperview];
     //[self.tableView reloadData];

@@ -12,4 +12,5 @@
 @interface schoolViewController : UIViewController <UITableViewDataSource,UITableViewDelegate>
 @property (nonatomic) school *school;
 @property (nonatomic) int schoolIndex;
+@property (nonatomic) int type;
 @end

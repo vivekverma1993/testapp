@@ -58,11 +58,10 @@
     
     //[[self rdv_tabBarItem] setBadgeValue:@"3"];
     
-    //self.navigationController.navigationBar.barTintColor = [UIColor colorWithRed:2/255.0f green:18/255.0f blue:13/255.0f alpha:1.0f];
+    [self.navigationController.navigationBar  setBarTintColor:[UIColor redColor]];
+    [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
     
-    self.navigationController.navigationBar.barStyle = UIBarStyleBlack;
-    
-    self.navigationController.navigationBar.tintColor = [UIColor whiteColor];
+    self.navigationItem.title = @"Nearby Schools";
     
     if (self.rdv_tabBarController.tabBar.translucent) {
         UIEdgeInsets insets = UIEdgeInsetsMake(0,
@@ -106,7 +105,7 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
             cell.backgroundColor = [UIColor colorWithRed:255/255.0f green:240/255.0f blue:240/255.0f alpha:1.0f];
             
-            UIView *searchview = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 30)];
+            UIView *searchview = [[UIView alloc] initWithFrame:CGRectMake(5, 5, 310, 40)];
             searchview.backgroundColor = [UIColor whiteColor];
             
             
@@ -118,23 +117,16 @@
             //searchBar.leftViewMode = UITextFieldViewModeAlways;
             self.searchBar.delegate = self;
             
-            UIView *mapView = [[UIView alloc] initWithFrame:CGRectMake(5, 45, 310, 70)];
-            mapView.backgroundColor = [UIColor whiteColor];
             
-            UIImageView *mapImageView = [[UIImageView alloc] initWithFrame:CGRectMake(80, 0, 150, 70)];
-            mapImageView.image = [UIImage imageNamed:@"map"];
-            
-            [mapView addSubview:mapImageView];
             [searchview addSubview:self.searchBar];
             [cell addSubview:searchview];
-            [cell addSubview:mapView];
         }
         
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }
     else{
-        NSString *simpleTableIdentifier = [NSString stringWithFormat:@"result%ld",indexPath.row];
+        NSString *simpleTableIdentifier = [NSString stringWithFormat:@"result%ld",(long)indexPath.row];
         UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:simpleTableIdentifier];
         if(cell == nil){
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
@@ -147,19 +139,20 @@
             UILabel *name = [[UILabel alloc] initWithFrame:CGRectMake(5, 5, 250, 20)];
             name.text = ((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).name;
             name.textColor = [UIColor redColor];
-            name.font = [UIFont fontWithName:@"Arial" size:12];
+
+            name.font = [UIFont fontWithName:@"Futura-Medium" size:12];
             
             UILabel *address = [[UILabel alloc] initWithFrame:CGRectMake(5, 25, 250, 20)];
             address.text = ((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).address;
             address.textColor = [UIColor blackColor];
-            address.font = [UIFont fontWithName:@"Arial" size:10];
+            address.font = [UIFont fontWithName:@"Futura-Medium" size:10];
             
             UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(275, 5, 30, 20)];
             rateLabel.text = [NSString stringWithFormat:@"%@",((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1]).rating];
             rateLabel.textAlignment= NSTextAlignmentCenter;
             rateLabel.backgroundColor = [UIColor orangeColor];
             rateLabel.textColor = [UIColor whiteColor];
-            rateLabel.font = [UIFont fontWithName:@"Arial-Bold" size:12];
+            rateLabel.font = [UIFont fontWithName:@"Futura-Medium" size:12];
         
             
             [bview addSubview:name];
@@ -175,11 +168,15 @@
 
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath{
-    return 120;
+    if(indexPath.row==0){
+        return 50;
+    }
+    else{
+        return 120;
+    }
 }
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath
-{
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath{
     if(indexPath.row!=0){
         [[dataModel sharedManager] setPresentSchool:((school *)[[[dataModel sharedManager] nearbySchools] objectAtIndex:indexPath.row-1])];
         [[dataModel sharedManager] setPresentSchoolIndex:(int)indexPath.row-1];
@@ -208,6 +205,7 @@
         // Pass any objects to the view controller here, like...
         vc.school = [[dataModel sharedManager] presentSchool];
         vc.schoolIndex = [[dataModel sharedManager] presentSchoolIndex];
+        vc.type = 0;
     }
     
 }

@@ -17,7 +17,9 @@
 @property(nonatomic) int presentSchoolIndex;
 @property(nonatomic) user *presentUser;
 @property(nonatomic) NSMutableArray *nearbySchools;
-@property (strong, nonatomic) UIWindow *window;
+@property(strong, nonatomic) UIWindow *window;
+@property(nonatomic) NSMutableArray *districtSchools;
+@property(nonatomic) NSString *currentZone;
 
 
 +(id) sharedManager;

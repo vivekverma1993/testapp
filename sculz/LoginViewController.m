@@ -16,6 +16,7 @@
 #import "ServerManager.h"
 #import "user.h"
 #import "NeabyMapViewController.h"
+#import "DistrictSchoolsViewController.h"
 
 @interface LoginViewController ()
 @property (nonatomic) UIImageView *Logo;
@@ -25,7 +26,7 @@
 @property (nonatomic) UITextField *password;
 @property (nonatomic, strong) UIAlertController *alertController;
 @property (nonatomic, strong) UIActivityIndicatorView *mySpinner;
-
+@property (nonatomic) BOOL visited;
 
 
 
@@ -81,16 +82,14 @@
 }
 
 -(void)loginAction{
-    NSString *username = self.username.text;
-    NSString *password = self.password.text;
-    if(username.length==0 || password.length==0){
-        [self makeAlert:@"please enter valid credentials"];
-    }
-    else{
+    if(!self.visited){
+        NSString *username = self.username.text;
+        NSString *password = self.password.text;
         [self.mySpinner startAnimating];
+        self.visited = YES;
         [[ServerManager sharedManager] isLoggedIn:username :password];
+
     }
-    
 }
 
 -(void)loginSuccess:(NSNotification *)loginInfo{
@@ -100,17 +99,22 @@
     user *prUsr = [[user alloc] initWithIdU:idOfUser name:name address:@"" contact:@""];
     [[dataModel sharedManager] setPresentUser:prUsr];
     
-    [self setupViewControllers];
-    [self customizeInterface];
-    [[ServerManager sharedManager] getNearbySchools:28.5723769 :77.2274863 :[NSString stringWithFormat:@"%d",((user*)[[dataModel sharedManager] presentUser]).idU]];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self setupViewControllers];
+        [self customizeInterface];
+        [[ServerManager sharedManager] getNearbySchools:28.5723769 :77.2274863 :[NSString stringWithFormat:@"%d",((user*)[[dataModel sharedManager] presentUser]).idU]];
+    });
+
     
 }
 
 -(void)propertiesFetched{
-    [self makeAlert:@"logged in"];
+    //[self makeAlert:@"logged in"];
     [self.mySpinner stopAnimating];
-    [[[dataModel sharedManager] window] setRootViewController:self.viewController];
-    [[[dataModel sharedManager] window] makeKeyAndVisible];
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self showViewController:self.viewController sender:nil];
+    });
 }
 
 -(void)loginFaliure:(NSNotification *)loginInfo{
@@ -125,7 +129,7 @@
     // Do any additional setup after loading the view.
     //UIColor * bColor = [UIColor colorWithRed:255/255.0f green:197/255.0f blue:1/255.0f alpha:1.0f];
     
-    
+     self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tabbed"];
     
     locationManager = [[CLLocationManager alloc] init];
     locationManager.delegate = self;
@@ -269,7 +273,7 @@
     UIViewController *secondNavigationController = [[UINavigationController alloc]
                                                     initWithRootViewController:secondViewController];
     
-    UIViewController *thirdViewController = [[NearbySchoolViewController alloc] init];
+    UIViewController *thirdViewController = [[DistrictSchoolsViewController alloc] init];
     UIViewController *thirdNavigationController = [[UINavigationController alloc]
                                                    initWithRootViewController:thirdViewController];
     

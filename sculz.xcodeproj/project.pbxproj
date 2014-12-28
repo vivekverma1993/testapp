@@ -37,6 +37,8 @@
 		E2C9A80F1A4E9B1E0029DBA7 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C9A80E1A4E9B1E0029DBA7 /* QuartzCore.framework */; };
 		E2C9A8111A4E9B2B0029DBA7 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E2C9A8101A4E9B2B0029DBA7 /* SystemConfiguration.framework */; };
 		E2C9A8171A4EE7250029DBA7 /* NeabyMapViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9A8161A4EE7250029DBA7 /* NeabyMapViewController.m */; };
+		E2C9A81B1A502D670029DBA7 /* DistrictSchoolsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9A81A1A502D670029DBA7 /* DistrictSchoolsViewController.m */; };
+		E2C9A81F1A5071CC0029DBA7 /* SingleDistrictViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2C9A81E1A5071CC0029DBA7 /* SingleDistrictViewController.m */; };
 		E2E856C81A44067900680528 /* schoolViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856C71A44067900680528 /* schoolViewController.m */; };
 		E2E856CE1A45779400680528 /* school.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856CD1A45779400680528 /* school.m */; };
 		E2E856D21A457B6300680528 /* dataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = E2E856D11A457B6300680528 /* dataModel.m */; };
@@ -99,6 +101,10 @@
 		E2C9A8101A4E9B2B0029DBA7 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E2C9A8151A4EE7250029DBA7 /* NeabyMapViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = NeabyMapViewController.h; sourceTree = "<group>"; };
 		E2C9A8161A4EE7250029DBA7 /* NeabyMapViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = NeabyMapViewController.m; sourceTree = "<group>"; };
+		E2C9A8191A502D670029DBA7 /* DistrictSchoolsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DistrictSchoolsViewController.h; sourceTree = "<group>"; };
+		E2C9A81A1A502D670029DBA7 /* DistrictSchoolsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DistrictSchoolsViewController.m; sourceTree = "<group>"; };
+		E2C9A81D1A5071CC0029DBA7 /* SingleDistrictViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SingleDistrictViewController.h; sourceTree = "<group>"; };
+		E2C9A81E1A5071CC0029DBA7 /* SingleDistrictViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SingleDistrictViewController.m; sourceTree = "<group>"; };
 		E2E856C61A44067900680528 /* schoolViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = schoolViewController.h; sourceTree = "<group>"; };
 		E2E856C71A44067900680528 /* schoolViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = schoolViewController.m; sourceTree = "<group>"; };
 		E2E856CA1A44078600680528 /* constants.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = constants.h; sourceTree = "<group>"; };
@@ -300,9 +306,29 @@
 			name = "Nearby Map View";
 			sourceTree = "<group>";
 		};
+		E2C9A8181A502D170029DBA7 /* District Wise Schools */ = {
+			isa = PBXGroup;
+			children = (
+				E2C9A8191A502D670029DBA7 /* DistrictSchoolsViewController.h */,
+				E2C9A81A1A502D670029DBA7 /* DistrictSchoolsViewController.m */,
+			);
+			name = "District Wise Schools";
+			sourceTree = "<group>";
+		};
+		E2C9A81C1A50718E0029DBA7 /* Each District Schools */ = {
+			isa = PBXGroup;
+			children = (
+				E2C9A81D1A5071CC0029DBA7 /* SingleDistrictViewController.h */,
+				E2C9A81E1A5071CC0029DBA7 /* SingleDistrictViewController.m */,
+			);
+			name = "Each District Schools";
+			sourceTree = "<group>";
+		};
 		E2E856C51A4405E200680528 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				E2C9A81C1A50718E0029DBA7 /* Each District Schools */,
+				E2C9A8181A502D170029DBA7 /* District Wise Schools */,
 				E2C9A8141A4EE6A50029DBA7 /* Nearby Map View */,
 				E239E9F51A486E7A00B1F71D /* Login View */,
 				E2E856D91A45B83700680528 /* Nearby Schools TableView */,
@@ -485,8 +511,10 @@
 				E239E9F41A4837AB00B1F71D /* RDVTabBarItem.m in Sources */,
 				E239E9F81A486EA300B1F71D /* LoginViewController.m in Sources */,
 				E240195D1A43417800E75EBA /* main.m in Sources */,
+				E2C9A81B1A502D670029DBA7 /* DistrictSchoolsViewController.m in Sources */,
 				E2E856DC1A45B88700680528 /* NearbySchoolViewController.m in Sources */,
 				E239E9F21A4837AB00B1F71D /* RDVTabBar.m in Sources */,
+				E2C9A81F1A5071CC0029DBA7 /* SingleDistrictViewController.m in Sources */,
 				E239E9FC1A493EC800B1F71D /* ServerManager.m in Sources */,
 				E239EA001A49A86500B1F71D /* StarRatingView.m in Sources */,
 				E2C9A8171A4EE7250029DBA7 /* NeabyMapViewController.m in Sources */,
