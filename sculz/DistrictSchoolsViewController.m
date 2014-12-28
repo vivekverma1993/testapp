@@ -10,6 +10,8 @@
 #import "ServerManager.h"
 #import "dataModel.h"
 #import "SingleDistrictViewController.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
 
 @interface DistrictSchoolsViewController ()
 @property (nonatomic, strong) UITableView *tableView;
@@ -30,6 +32,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[self rdv_tabBarItem] setTitle:@"Districts"];
+    
     [self.navigationController.navigationBar  setBarTintColor:[UIColor redColor]];
     
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];

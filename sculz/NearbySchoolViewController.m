@@ -56,7 +56,7 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view.
     
-    //[[self rdv_tabBarItem] setBadgeValue:@"3"];
+    [[self rdv_tabBarItem] setTitle:@"Nearby"]; 
     
     [self.navigationController.navigationBar  setBarTintColor:[UIColor redColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];

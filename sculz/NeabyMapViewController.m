@@ -11,6 +11,9 @@
 #import "dataModel.h"
 #import "school.h"
 #import "StarRatingView.h"
+#import "RDVTabBarController.h"
+#import "RDVTabBarItem.h"
+
 
 @interface NeabyMapViewController ()
 @property (nonatomic) GMSMapView *mapView;
@@ -22,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
+    [[self rdv_tabBarItem] setTitle:@"Maps"];
+    
     [self.navigationController.navigationBar  setBarTintColor:[UIColor redColor]];
     [self.navigationController.navigationBar setTitleTextAttributes:[NSDictionary dictionaryWithObjectsAndKeys:[UIColor blackColor], NSForegroundColorAttributeName, [UIFont fontWithName:@"HelveticaNeue-CondensedBlack" size:21.0], NSFontAttributeName, nil]];
     
