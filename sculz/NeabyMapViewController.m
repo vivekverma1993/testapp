@@ -39,7 +39,7 @@
     GMSCameraPosition *camera = [GMSCameraPosition cameraWithLatitude:lat
                                                             longitude:lon
                                                                  zoom:13];
-    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 64, 320, self.view.bounds.size.height-64) camera:camera];
+    self.mapView = [GMSMapView mapWithFrame:CGRectMake(0, 64, self.view.bounds.size.width, self.view.bounds.size.height-64) camera:camera];
     self.mapView.settings.zoomGestures = YES;
     self.mapView.settings.scrollGestures = YES;
     

@@ -49,7 +49,7 @@
     
     self.names = @[@"New Delhi", @"Central", @"North", @"East", @"West A", @"West B", @"South"];
     
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,64, 320, self.view.bounds.size.height-64)];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,64, self.view.bounds.size.width, self.view.bounds.size.height-64)];
     
     self.tableView.delegate =self;
     self.tableView.dataSource = self;

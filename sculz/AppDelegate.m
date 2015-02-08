@@ -10,6 +10,8 @@
 #import "LoginViewController.h"
 #import "dataModel.h"
 #import <GoogleMaps/GoogleMaps.h>
+#import <FacebookSDK/FacebookSDK.h>
+#import <GooglePlus/GooglePlus.h>
 
 @interface AppDelegate ()
 
@@ -20,7 +22,7 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch
-
+    [FBLoginView class];
     [GMSServices provideAPIKey:@"AIzaSyBCbd_T_EbPYmalEP8P-PEzY0hXFMF34m8"];
 
     LoginViewController *loginViewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"login"];
@@ -39,6 +41,31 @@
     return YES;
 }
 
+- (BOOL)application:(UIApplication *)application
+            openURL:(NSURL *)url
+  sourceApplication:(NSString *)sourceApplication
+         annotation:(id)annotation {
+    
+    // Call FBAppCall's handleOpenURL:sourceApplication to handle Facebook app responses
+    BOOL wasHandledByFacebook = [FBAppCall handleOpenURL:url sourceApplication:sourceApplication];
+    
+    BOOL wasHandledByGoogle = [GPPURLHandler handleURL:url
+                                     sourceApplication:sourceApplication
+                                            annotation:annotation];
+
+    
+    // You can add your app-specific url handling code here if needed
+    if(wasHandledByFacebook){
+        return wasHandledByFacebook;
+    }
+    else if(wasHandledByGoogle){
+        return wasHandledByGoogle;
+    }
+    else{
+        return NO;
+    }
+    
+}
 
 
 

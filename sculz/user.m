@@ -13,13 +13,15 @@
 - (instancetype)initWithIdU:(int)idU
                        name:(NSString*)name
                     address:(NSString*)address
-                    contact:(NSString*)contact{
+                    contact:(NSString*)contact
+                        role:(NSString*)role{
     self = [super init];
     if (self) {
         _idU = idU;
         _name = name;
         _address = address;
         _contact = contact;
+        _role =  role;
     }
     return self;
 }

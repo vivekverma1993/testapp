@@ -29,6 +29,8 @@
 @property (nonatomic, strong) UIButton *ratingCancelButton;
 @property (nonatomic, strong) UIButton *ratingSubmitButton;
 @property (nonatomic, strong) UIActivityIndicatorView *mySpinner;
+
+@property (nonatomic, strong) UILabel *rateLabel;
  
 // attributes
 
@@ -66,6 +68,7 @@
     NSString *rating = [dict objectForKey:@"userRating"];
     [self.school setCurrentUserRating:rating];
     [self.school setRating:newRating];
+    [self.rateLabel setText:newRating];
     if(self.type==0){
         [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
     }
@@ -87,6 +90,7 @@
     [self.school setCurrentUserRating:rating];
     [self.school setRating:newRating];
     [self.school setNumberOfRaters:totalRating];
+    [self.rateLabel setText:newRating];
     if(self.type==0){
         [[[dataModel sharedManager] nearbySchools] setObject:self.school atIndexedSubscript:self.schoolIndex];
     }
@@ -221,7 +225,7 @@
 
 
 -(UIView *)constructDownButtonView:(float) height{
-    self.downButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, height-50 , 320, 50)];
+    self.downButtonView = [[UIView alloc] initWithFrame:CGRectMake(0, height-50 , self.view.bounds.size.width, 50)];
     
     self.callButton =  [UIButton buttonWithType:UIButtonTypeCustom];
     [self.callButton setImage:[UIImage imageNamed:@"iphone1"] forState:UIControlStateNormal];
@@ -280,7 +284,7 @@
     [super viewDidLoad];
     
     // Do any additional setup after loading the view.
-    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, 320, self.view.bounds.size.height-64)];
+    self.tableView =[[UITableView alloc] initWithFrame:CGRectMake(0,0, self.view.bounds.size.width, self.view.bounds.size.height-64)];
     
     self.tableView.delegate =self;
     self.tableView.dataSource = self;
@@ -332,7 +336,7 @@
             
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
             
-            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, 320, cellHeight)];
+            UIImageView *imageView = [[UIImageView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, cellHeight)];
             imageView.image = [UIImage imageNamed:@"scl.jpg"];
             
             
@@ -342,20 +346,20 @@
             nameLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
             
             
-            UILabel *rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 15, 30, 25)];
-            rateLabel.text = self.school.rating;
-            rateLabel.textAlignment= NSTextAlignmentCenter;
-            rateLabel.backgroundColor = [UIColor orangeColor];
-            rateLabel.textColor = [UIColor whiteColor];
-            rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
+            self.rateLabel = [[UILabel alloc] initWithFrame:CGRectMake(265, 15, 30, 25)];
+            self.rateLabel.text = self.school.rating;
+            self.rateLabel.textAlignment= NSTextAlignmentCenter;
+            self.rateLabel.backgroundColor = [UIColor orangeColor];
+            self.rateLabel.textColor = [UIColor whiteColor];
+            self.rateLabel.font = [UIFont fontWithName:@"Arial-BoldMT" size:12];
             
-            FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, 320, cellHeight)];
+            FXBlurView *blurView = [[FXBlurView alloc] initWithFrame:CGRectMake(0, 0, self.view.bounds.size.width, cellHeight)];
             blurView.alpha=0.95;
             blurView.tintColor = [UIColor blackColor];
             [blurView setDynamic:NO];
             [imageView addSubview:blurView];
             [imageView addSubview:nameLabel];
-            [imageView addSubview:rateLabel];
+            [imageView addSubview:self.rateLabel];
             
             [cell addSubview:imageView];
             [cell addSubview:self.downButtonView];

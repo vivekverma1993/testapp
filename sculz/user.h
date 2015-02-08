@@ -10,16 +10,18 @@
 
 @interface user : NSObject
 
+
 @property(nonatomic) int idU;
 @property(nonatomic) NSString *name;
 @property(nonatomic) NSString *address;
 @property(nonatomic) NSString *contact;
-
+@property(nonatomic) NSString *role;
 
 - (instancetype)initWithIdU:(int)idU
                        name:(NSString*)name
                     address:(NSString*)address
-                    contact:(NSString*)contact;
+                    contact:(NSString*)contact
+                       role:(NSString*)role;
 
 
 @end

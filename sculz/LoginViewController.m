@@ -96,7 +96,7 @@
     NSDictionary *dict = [loginInfo userInfo];
     int idOfUser = (int)[[dict objectForKey:@"id"] integerValue];
     NSString *name = [dict objectForKey:@"name"];
-    user *prUsr = [[user alloc] initWithIdU:idOfUser name:name address:@"" contact:@""];
+    user *prUsr = [[user alloc] initWithIdU:idOfUser name:name address:@"" contact:@"" role:@"student"];
     [[dataModel sharedManager] setPresentUser:prUsr];
     
     
@@ -127,8 +127,9 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     // Do any additional setup after loading the view.
-    //UIColor * bColor = [UIColor colorWithRed:255/255.0f green:197/255.0f blue:1/255.0f alpha:1.0f];
+    UIColor * backcolor = [UIColor colorWithRed:255/255.0f green:242/255.0f blue:204/255.0f alpha:1.0f];
     
+    self.view.backgroundColor = backcolor;
      self.viewController = [[UIStoryboard storyboardWithName:@"Main" bundle:nil] instantiateViewControllerWithIdentifier:@"tabbed"];
     
     locationManager = [[CLLocationManager alloc] init];
@@ -197,15 +198,15 @@
     
     [self.loginButton addSubview:logText];
     
-    UIImageView *backImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
-    backImageView.image = [UIImage imageNamed:@"backgroundLogin.jpg"];
+//    UIImageView *backImageView = [[UIImageView alloc] initWithFrame:self.view.bounds];
+//    backImageView.image = [UIImage imageNamed:@"backgroundLogin.jpg"];
     
     [self.view addSubview:self.Logo];
     [self.userAndPass addSubview:seperator];
     [self.userAndPass addSubview:self.username];
     [self.userAndPass addSubview:self.password];
     [self.view addSubview:self.userAndPass];
-    [self.view insertSubview:backImageView atIndex:1];
+    //[self.view insertSubview:backImageView atIndex:1];
     [self.view addSubview:self.loginButton];
     
     
