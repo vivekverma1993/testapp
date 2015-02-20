@@ -46,7 +46,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="D3B-Te-9Ff" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1635.5" y="1111.5"/>
+            <point key="canvasLocation" x="1479.5" y="1111.5"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="j4I-Pa-ArN">
@@ -68,10 +68,29 @@
             </objects>
             <point key="canvasLocation" x="1136.5" y="115.5"/>
         </scene>
+        <!--Side Bar View Controller-->
+        <scene sceneID="c9J-nm-4RA">
+            <objects>
+                <viewController storyboardIdentifier="side" id="bOF-qE-8wv" customClass="SideBarViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0fb-xt-NON"/>
+                        <viewControllerLayoutGuide type="bottom" id="9ry-9X-5yy"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="r74-p5-rmG">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="MF8-w9-MsH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-21.5" y="565.5"/>
+        </scene>
         <!--First Page View Controller-->
         <scene sceneID="rrl-oG-7Yh">
             <objects>
-                <viewController id="GIq-Xo-DDc" customClass="firstPageViewController" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="firstPage" id="GIq-Xo-DDc" customClass="firstPageViewController" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="Y6v-Ri-DYF"/>
                         <viewControllerLayoutGuide type="bottom" id="f3Z-VY-5tN"/>
@@ -85,7 +104,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="C3T-CR-OL1" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="556.5" y="893.5"/>
+            <point key="canvasLocation" x="-3.5" y="-490.5"/>
         </scene>
         <!--Nearby School View Controller-->
         <scene sceneID="jGr-9i-KSF">
@@ -100,6 +119,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
+                    <navigationItem key="navigationItem" id="dI9-9k-c0f"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <segue destination="kNc-lc-A3Z" kind="show" identifier="schoolDetail" id="FaU-H5-l7Y"/>
@@ -107,7 +127,30 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aPg-D6-pml" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5" y="1111.5"/>
+            <point key="canvasLocation" x="790.5" y="1427.5"/>
+        </scene>
+        <!--Reveal View Controller-->
+        <scene sceneID="QDH-B1-JfP">
+            <objects>
+                <viewController id="GZ3-4l-N1p" customClass="SWRevealViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="0nh-km-aEQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="CNT-Yh-jX3"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="z2O-R1-DPu">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <segue destination="bOF-qE-8wv" kind="custom" identifier="sw_rear" customClass="SWRevealViewControllerSegueSetController" id="vGK-s1-R7G"/>
+                        <segue destination="gq0-c5-ZbL" kind="custom" identifier="sw_front" customClass="SWRevealViewControllerSegueSetController" id="4uh-hU-p0G"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bJW-2I-ZLL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-607.5" y="565.5"/>
         </scene>
         <!--Neaby Map View Controller-->
         <scene sceneID="vQB-NX-mq5">
@@ -126,7 +169,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="gZk-JT-6eq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1061.5" y="1891.5"/>
+            <point key="canvasLocation" x="1479.5" y="1863.5"/>
         </scene>
         <!--District Schools View Controller-->
         <scene sceneID="Ax2-6B-Wll">
@@ -185,6 +228,25 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="nH8-zw-ib3" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1061" y="2613"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="SHV-6W-kg9">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="gq0-c5-ZbL" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="v7v-XN-zhm">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="1PX-nc-8uZ" kind="relationship" relationship="rootViewController" id="IoE-bM-CiO"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ELy-bl-sPW" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-22" y="1427"/>
         </scene>
     </scenes>
 </document>

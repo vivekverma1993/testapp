@@ -22,4 +22,6 @@
 
 -(void)isLoggedIn:(NSString *)username :(NSString *)password;
 
+-(void)saveSchool:(NSString *)name :(NSString *)address :(NSString *)contact :(NSString *)email;
+
 @end

@@ -260,7 +260,7 @@ static NSString * const kClientId = @"680636833074-988ticslmk03kjah37ptmfav2t479
 
 
 -(void)loginAction{
-    NSLog(@"login action");
+//    NSLog(@"login action");
     [self addloginToView];
 }
 
@@ -338,11 +338,14 @@ static NSString * const kClientId = @"680636833074-988ticslmk03kjah37ptmfav2t479
 // This method will be called when the user information has been fetched
 - (void)loginViewFetchedUserInfo:(FBLoginView *)loginView
                             user:(id<FBGraphUser>)user {
-    if (FBSession.activeSession.isOpen)
-    {
-        [FBSession.activeSession closeAndClearTokenInformation];
-    }
+//    if (FBSession.activeSession.isOpen)
+//    {
+//        [FBSession.activeSession closeAndClearTokenInformation];
+//    }
    // self.nameLabel.text = user.name;
+    NSLog(@"%@",user.objectID);
+    NSString *str = user.objectID;
+    [[dataModel sharedManager] setProfileIdOfuser:[NSString stringWithFormat:@"%@",str]];
     NSArray *keys = [NSArray arrayWithObjects:@"id",@"name", nil];
     NSArray *objects = [NSArray arrayWithObjects:[NSString stringWithFormat:@"%@",@"1"],[NSString stringWithFormat:@"%@",user.name], nil];
     NSDictionary *loginDesc = [[NSDictionary alloc] initWithObjects:objects forKeys:keys];

@@ -126,7 +126,7 @@
                         
                         
                         
-                        NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
+//                        NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
                         tempSchool = [[school alloc] initWithIdS:(int)[item[@"results"][i][@"id"] integerValue]
                                                             name:item[@"results"][i][@"name"]
                                                          address:item[@"results"][i][@"address"]
@@ -146,7 +146,7 @@
                         i++;
                     }
                     [[dataModel sharedManager] setNearbySchools:(NSMutableArray *)arr];
-                    NSLog(@"total number of schools is %ld",(long)[[[dataModel sharedManager] nearbySchools] count]);
+//                    NSLog(@"total number of schools is %ld",(long)[[[dataModel sharedManager] nearbySchools] count]);
                     [[NSNotificationCenter defaultCenter] postNotificationName:@"propertiesFetched" object:LoginViewController.class];
                 }
             }
@@ -203,7 +203,7 @@
                         
                         
                         
-                        NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
+//                        NSLog(@"id of current school is %d",(int)[item[@"results"][i][@"id"] integerValue]);
                         tempSchool = [[school alloc] initWithIdS:(int)[item[@"results"][i][@"id"] integerValue]
                                                             name:item[@"results"][i][@"name"]
                                                          address:item[@"results"][i][@"address"]
@@ -333,6 +333,34 @@
     
     sleep(2);
 
+}
+
+
+-(void)saveSchool:(NSString *)name :(NSString *)address :(NSString *)contact :(NSString *)email{
+    NSString *URLString = [NSString stringWithFormat:@"http://localhost:8888/saveSchool?name=%@&address=%@&contact=%@&email=%@",name ,address,contact,email];
+    
+    NSString* urlTextEscaped = [URLString stringByAddingPercentEscapesUsingEncoding:NSUTF8StringEncoding];
+    NSURL *URL = [NSURL URLWithString:urlTextEscaped];
+    
+    //Making the MutableURLrequest & configuring it (POST) to add more headers/data to it.
+    NSMutableURLRequest *postRequest = [NSMutableURLRequest requestWithURL:URL];
+    [postRequest setTimeoutInterval:60];
+    [postRequest setHTTPMethod:@"POST"];
+    
+    //Creating the URL session and corresponding configuration
+    NSURLSessionConfiguration *sessionConfig = [NSURLSessionConfiguration defaultSessionConfiguration];
+    NSURLSession *session = [NSURLSession sessionWithConfiguration:sessionConfig];
+    
+    [[session dataTaskWithRequest:postRequest completionHandler:^(NSData *data, NSURLResponse *response, NSError *error) {
+        NSHTTPURLResponse *myResponse = (NSHTTPURLResponse*) response;
+        NSLog(@"my status code is %ld" , (long)myResponse.statusCode);
+        if (myResponse.statusCode == 200)
+        {
+            NSDictionary  *item = [NSJSONSerialization JSONObjectWithData:data options:NSJSONReadingAllowFragments error:&error];
+            NSLog(@"%@",item[@"message"]);
+        }
+    }] resume];
+    
 }
 
 @end

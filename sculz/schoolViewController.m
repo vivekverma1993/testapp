@@ -401,6 +401,12 @@
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:simpleTableIdentifier];
         }
         
+        UILabel *Reviews = [[UILabel alloc] initWithFrame:CGRectMake(20, 5, 200, 50)];
+        Reviews.text = @"REVIEWS";
+        Reviews.textAlignment = NSTextAlignmentCenter;
+        
+        [cell addSubview:Reviews];
+        
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
         return cell;
     }

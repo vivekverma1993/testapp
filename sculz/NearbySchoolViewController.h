@@ -8,6 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface NearbySchoolViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate>
+@interface NearbySchoolViewController : UIViewController <UITableViewDataSource,UITableViewDelegate,UITextFieldDelegate, UITextViewDelegate>
+
 
 @end

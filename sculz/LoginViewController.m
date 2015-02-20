@@ -141,7 +141,7 @@
     float currentlatitude = locationManager.location.coordinate.latitude;
     float currentlongitude = locationManager.location.coordinate.longitude;
     
-    NSLog(@"lat is %f and lon is %f",currentlatitude,currentlongitude);
+//    NSLog(@"lat is %f and lon is %f",currentlatitude,currentlongitude);
     
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]
                                    initWithTarget:self

@@ -10,6 +10,7 @@
 #import <Foundation/Foundation.h>
 #import "school.h"
 #import "user.h"
+#import  <FacebookSDK/FacebookSDK.h>
 
 @interface dataModel : NSObject
 
@@ -20,7 +21,7 @@
 @property(strong, nonatomic) UIWindow *window;
 @property(nonatomic) NSMutableArray *districtSchools;
 @property(nonatomic) NSString *currentZone;
-
+@property(nonatomic) NSString *profileIdOfuser;
 
 +(id) sharedManager;
 

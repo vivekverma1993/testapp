@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>cellImages</key>
+	<array>
+		<string>current_status</string>
+		<string>add_school</string>
+		<string>edit_profile</string>
+		<string>sign_out</string>
+	</array>
+	<key>cellTiltes</key>
+	<array>
+		<string>Current Status</string>
+		<string>Add School</string>
+		<string>Edit Profile</string>
+		<string>Sign Out</string>
+	</array>
+	<key>Identifiers</key>
+	<array>
+		<string>current_status</string>
+		<string>add_school</string>
+		<string>edit_profile</string>
+		<string>sign_out</string>
+	</array>
+</dict>
+</plist>

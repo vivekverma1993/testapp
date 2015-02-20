@@ -22,6 +22,7 @@
         sharedMyManager.presentUser = [[user alloc] init];
         sharedMyManager.districtSchools = [[NSMutableArray alloc] init];
         sharedMyManager.currentZone = [[NSString alloc] init];
+        sharedMyManager.profileIdOfuser =  [[NSString alloc] init];
     });
     return sharedMyManager;
 }
